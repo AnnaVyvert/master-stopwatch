@@ -1,0 +1,75 @@
+.laps-container,
+.total-time-container,
+.add-panel-container,
+.control-panel {
+  margin: 16px 0;
+  text-align: center;
+}
+
+body {
+  zoom: 1.1;
+}
+
+.total-time {
+  font-size: 60px;
+}
+
+.laps-container table {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.laps-container table thead {
+  font-variant: all-petite-caps;
+  font-size: larger;
+}
+
+.laps-container button {
+  margin: 4px 0 4px 8px;
+}
+
+button.reset {
+  margin-top: 8px;
+}
+
+.control-panel input.note {
+  height: 36px;
+  padding: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+}
+
+.center {
+  text-align: center;
+}
+
+button {
+  border: 1px solid lightgrey;
+  padding: 8px;
+  width: 36px;
+  aspect-ratio: 1;
+}
+
+span.note {
+  word-break: break-all;
+}
+
+.laps-container {
+  max-width: 80vh;
+  margin: auto;
+}
+
+.laps-container table th,
+.laps-container table td {
+  padding: 4px;
+}
+
+thead th:nth-child(4) {
+  width: 218px;
+}
+thead th:nth-child(5) {
+  visibility: hidden;
+  width: 200px;
+}

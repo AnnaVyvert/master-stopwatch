@@ -1,0 +1,60 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3279/3279238.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="ubuntu-tokens.css" />
+    <link rel="stylesheet" href="ubuntu-bind.css" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <title>stopwatch</title>
+  </head>
+  <body>
+    <section class="total-time-container">
+      <span class="total-time"></span>
+    </section>
+    <section class="control-panel">
+      <button onclick="start()" class="start"><i class="fa-solid fa-play"></i></button>
+      <button onclick="stop()" hidden class="stop"><i class="fa-solid fa-pause"></i></button>
+      <input class="note" type="text" placeholder="note" />
+      <button onclick="submitLap()" class="submit"><i class="fa-solid fa-check"></i></button>
+    </section>
+    <section class="add-panel-container">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </section>
+    <section class="laps-container" hidden>
+      <table>
+        <thead>
+          <th>lap</th>
+          <th>start time</th>
+          <th>time</th>
+          <th>note</th>
+          <th>action</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+    <div class="center">
+      <button onclick='reset()' class="reset"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </body>
+  <script src="src/binders/key-binder.js"></script>
+  <script src="src/binders/ref-binder.js"></script>
+
+  <script src="src/workers/store-worker.js"></script>
+  <script src="src/workers/table-worker.js"></script>
+  <script src="src/workers/time-worker.js"></script>
+
+  <script src="src/workers/lap-store-worker.js"></script>
+  <script src="src/workers/stopwatch-worker.js"></script>
+
+  <script src="src/src.js"></script>
+</html>

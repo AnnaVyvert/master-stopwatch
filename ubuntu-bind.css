@@ -1,0 +1,88 @@
+body {
+  background-color: var(--aubergine-dark);
+  color: white;
+  font-family: monospace, monospace;
+}
+
+tbody tr[_disabled] {
+  opacity: 0.7;
+}
+
+tbody tr[_disabled] button.disable {
+  color: var(--green);
+  border-color: var(--green) !important;
+}
+
+th, td {
+  border-bottom: 1px solid white;
+}
+
+.total-time:hover,
+th:hover,
+td:hover {
+  color: var(--green);
+}
+
+button {
+  cursor: pointer;
+  color: white;
+  background-color: var(--gray-warm-cool);
+  border: 1px solid var(--gray-warm-light);
+  border-radius: 4px;
+}
+
+button[_disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+button:focus {
+  /* border: none; */
+  outline-color: var(--green);  
+}
+
+button:hover {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+input {
+  background-color: transparent;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  color: white;
+}
+
+input:hover {
+  border-color: var(--green) !important;
+  outline: none;
+}
+
+input:hover::placeholder {
+  color: var(--green);
+}
+
+input:focus::placeholder {
+  color: var(--green);
+}
+
+input:focus {
+  border-color: var(--green) !important;
+  outline: none;
+}
+
+.control-panel input.note {
+  color: white;
+  background-color: var(--aubergine-dark);
+}
+
+::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+button:has(i.fa-lock) + button.delete:hover,
+.laps-container:not(:has(i.fa-lock-open)) + div button.reset:hover {
+  color: var(--orange);
+  border-color: var(--orange);
+}

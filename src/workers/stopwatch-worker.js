@@ -107,7 +107,7 @@ function protectLap(id) {
 function deleteTime(id) {
   if (getRefAction(id).isLocked) return;
   const elTime = getValueFromLapStore(Number(id)).time;
-  sumTime -= elTime;
+  if (!getRowRef(id).hasAttribute(DISABLED_ATTRIBUTE)) sumTime -= elTime;
   updateLabel(sumTime);
 
   getRowRef(id).setAttribute('style', 'display: none');

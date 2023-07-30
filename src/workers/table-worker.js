@@ -8,6 +8,13 @@ function editCell(rowId, id, key) {
   }
   spanRef.hidden = !spanRef.hidden;
   inputRef.hidden = !inputRef.hidden;
+  inputRef.addEventListener('input', (ev) => {
+    if (ev.data === ' ') {
+      setTimeout(() => {
+        isPlaying ? stop() : start();
+      });
+    }
+  });
   inputRef.addEventListener('focusout', (ev) => {
     if (key === 'note') {
       spanRef.textContent = inputRef.value.trim() || '-';
@@ -55,8 +62,7 @@ function updateLapsTableVisibility() {
   // if (!store) return (lapsContainerRef.hidden = true);
   // store = JSON.parse(store);
   // if (isArrayEmpty(store)) return (lapsContainerRef.hidden = true);
-  let store = preprocessLapStore()
-  if (!store) return lapsContainerRef.hidden = true;
+  let store = preprocessLapStore();
+  if (!store) return (lapsContainerRef.hidden = true);
   lapsContainerRef.hidden = false;
-
 }

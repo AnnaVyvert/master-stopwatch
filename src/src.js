@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   bindKeys();
   updateTableFromLapStore();
   idCount = findMaxIdInLapStore() + 1;
-  getRefSubmitBtn().setAttribute(DISABLED_ATTRIBUTE, true);
 
   const presentLapStore = jsonCRUD(PRESENT_LAP_STORE_NAME).read();
 

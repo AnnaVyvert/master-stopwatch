@@ -31,9 +31,6 @@ function controlPanel() {
       isPlaying = true;
       updateButtonVisibility();
       stopWatch();
-      setTimeout(() => {
-        getRefSubmitBtn().removeAttribute(DISABLED_ATTRIBUTE);
-      }, 1000);
     },
     stop: () => {
       isPlaying = false;
@@ -82,10 +79,6 @@ function start() {
     if (presentLapStore.isPlaying) {
     }
   }
-
-  setTimeout(() => {
-    getRefSubmitBtn().removeAttribute(DISABLED_ATTRIBUTE);
-  }, 1000);
 }
 
 function stop() {
@@ -132,9 +125,6 @@ function disableTime(id) {
 }
 
 function submitLap() {
-  const isSubmitDisabled = getRefSubmitBtn().hasAttribute(DISABLED_ATTRIBUTE);
-  if (isSubmitDisabled) return;
-
   const now = new Date();
   const timeData = {
     id: idCount,
@@ -160,13 +150,9 @@ function submitLap() {
   jsonCRUD(PRESENT_LAP_STORE_NAME).update('time', 0);
   jsonCRUD(PRESENT_LAP_STORE_NAME).update('note', '');
 
-  getRefSubmitBtn().setAttribute(DISABLED_ATTRIBUTE, true);
   idCount++;
   secCountPrev = secCount;
   secLap = 0;
-  setTimeout(() => {
-    if (secCountPrev < secCount) getRefSubmitBtn().removeAttribute(DISABLED_ATTRIBUTE);
-  }, 1000);
 
   document.querySelector(NOTE_INPUT_CONTAINER).value = '';
   setNewValueToLapStore(timeData);

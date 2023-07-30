@@ -3,8 +3,6 @@ const ACTION_JSON = {
     isPlaying ? document.querySelector('button.stop').click() : document.querySelector('button.start').click();
   },
   Enter: () => {
-    const isSubmitDisabled = getRefSubmitBtn().hasAttribute(DISABLED_ATTRIBUTE);
-    if (isSubmitDisabled) return;
     getRefSubmitBtn().click();
   },
 };

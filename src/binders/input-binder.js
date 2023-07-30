@@ -1,6 +1,12 @@
 function noteHandleEvent(ev) {
   const presentLapStore = jsonCRUD(PRESENT_LAP_STORE_NAME).read();
 
+  if (ev.data === ' ') {
+    setTimeout(() => {
+      isPlaying ? stop() : start();
+    });
+  }
+
   jsonCRUD(PRESENT_LAP_STORE_NAME).create({
     startTime: presentLapStore.startTime,
     note: ev.target.value,

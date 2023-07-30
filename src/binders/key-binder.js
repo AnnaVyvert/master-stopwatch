@@ -9,8 +9,19 @@ const ACTION_JSON = {
 
 function bindKeys() {
   document.addEventListener('keydown', (ev) => {
-    if (Object.keys(ACTION_JSON).includes(ev.code)) {
-      ACTION_JSON[ev.code]();
+    switch (ev.code) {
+      case 'Space':
+        console.log(ev.target.nodeName, ev.target.nodeName === 'INPUT');
+        if (ev.target.nodeName !== 'INPUT') {
+          ACTION_JSON[ev.code]();
+          console.log(22);
+        }
+        break;
+      case 'Enter':
+        if (!ev.target.id.length) {
+          ACTION_JSON[ev.code]();
+        }
+        break;
     }
   });
 }

@@ -8,13 +8,6 @@ function editCell(rowId, id, key) {
   }
   spanRef.hidden = !spanRef.hidden;
   inputRef.hidden = !inputRef.hidden;
-  inputRef.addEventListener('input', (ev) => {
-    if (ev.data === ' ') {
-      setTimeout(() => {
-        isPlaying ? stop() : start();
-      });
-    }
-  });
   inputRef.addEventListener('focusout', (ev) => {
     if (key === 'note') {
       spanRef.textContent = inputRef.value.trim() || '-';

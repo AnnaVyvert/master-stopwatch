@@ -6,6 +6,29 @@ function setValueToStore(key, value) {
   window.localStorage.setItem(key, value);
 }
 
+function jsonCRUD(storeName, defaultValue = '{}') {
+  let store = window.localStorage.getItem(storeName);
+  if (!store) {
+    setValueToStore(storeName, defaultValue);
+    store = defaultValue;
+  }
+  store = JSON.parse(store);
+
+  return {
+    create: (json) => {
+      setValueToStore(storeName, JSON.stringify(json, undefined, 2));
+    },
+    read: () => store,
+    update: (key, value) => {
+      store[key] = value;
+      setValueToStore(storeName, JSON.stringify(store, undefined, 2));
+    },
+    delete: () => {
+      window.localStorage.removeItem(storeName);
+    },
+  };
+}
+
 function setNewValueToLapStore(value) {
   let store = getValueFromStore(LAPS_STORE_NAME);
   if (store) {
@@ -87,7 +110,7 @@ function updateTableFromLapStore() {
       ],
     });
   });
-  sumTime = getSumTimeInLapStore()
+  sumTime = getSumTimeInLapStore();
 
   updateLabel(sumTime);
 }

@@ -6,6 +6,10 @@ function getRefTotalTimer() {
   return document.querySelector('.total-time-container .total-time');
 }
 
+function getRefUpperNote() {
+  return document.querySelector(`.control-panel input.note`);
+}
+
 function getRefSubmitBtn() {
   return document.querySelector(`.control-panel button.submit`);
 }

@@ -3,6 +3,7 @@ var isPlaying = false;
 var sumTime = 0;
 var secCountPrev = 0;
 var secCount = 0;
+var secLap = 0;
 var stopWatchInterval;
 
 var LAPS_CONTAINER = '.laps-container table';
@@ -13,6 +14,7 @@ const DISABLED_ATTRIBUTE = '_disabled';
 var idCount = 1;
 
 var LAPS_STORE_NAME = 'lap-store';
+var PRESENT_LAP_STORE_NAME = 'present-lap';
 
 var lockedIcon = 'fa-lock';
 var unlockedIcon = 'fa-lock-open';
@@ -65,6 +67,22 @@ function start() {
   isPlaying = true;
   updateButtonVisibility();
   stopWatch();
+
+  if (secCount === 0) {
+    jsonCRUD(PRESENT_LAP_STORE_NAME).create({
+      startTime: Date.now(),
+      note: getRefUpperNote().value,
+      time: null,
+      isPlaying: true,
+    });
+  } else {
+    jsonCRUD(PRESENT_LAP_STORE_NAME).update('isPlaying', true);
+
+    const presentLapStore = jsonCRUD(PRESENT_LAP_STORE_NAME).read();
+    if (presentLapStore.isPlaying) {
+    }
+  }
+
   setTimeout(() => {
     getRefSubmitBtn().removeAttribute(DISABLED_ATTRIBUTE);
   }, 1000);
@@ -74,6 +92,8 @@ function stop() {
   isPlaying = false;
   updateButtonVisibility();
   clearInterval(stopWatchInterval);
+
+  jsonCRUD(PRESENT_LAP_STORE_NAME).update('isPlaying', false);
 }
 
 function protectLap(id) {
@@ -92,6 +112,7 @@ function deleteTime(id) {
 
   getRowRef(id).setAttribute('style', 'display: none');
   deleteValueFromLapStore(Number(id));
+  updateLapsTableVisibility();
 }
 
 function disableTime(id) {
@@ -134,12 +155,19 @@ function submitLap() {
       { width: 218, key: 'note', data: timeData.note },
     ],
   });
+
+  jsonCRUD(PRESENT_LAP_STORE_NAME).update('startTime', Date.now());
+  jsonCRUD(PRESENT_LAP_STORE_NAME).update('time', 0);
+  jsonCRUD(PRESENT_LAP_STORE_NAME).update('note', '');
+
   getRefSubmitBtn().setAttribute(DISABLED_ATTRIBUTE, true);
   idCount++;
   secCountPrev = secCount;
+  secLap = 0;
   setTimeout(() => {
     if (secCountPrev < secCount) getRefSubmitBtn().removeAttribute(DISABLED_ATTRIBUTE);
   }, 1000);
+
   document.querySelector(NOTE_INPUT_CONTAINER).value = '';
   setNewValueToLapStore(timeData);
   updateLapsTableVisibility();
@@ -154,6 +182,8 @@ function stopWatch() {
   stopWatchInterval = setInterval(() => {
     secCount++;
     sumTime++;
+    secLap++;
+    jsonCRUD(PRESENT_LAP_STORE_NAME).update('time', secLap);
     updateLabel(sumTime);
   }, 1000);
 }

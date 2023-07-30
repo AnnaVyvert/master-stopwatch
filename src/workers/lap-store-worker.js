@@ -7,9 +7,9 @@ function findMaxIdInLapStore() {
 }
 
 function getSumTimeInLapStore() {
-  let store = lapStoreCRUD().read()
+  let store = preprocessLapStore();
   if (!store) return 0;
-  
+
   return store.reduce((acc, el) => {
     return !el.disabled ? acc + el.time : acc + 0;
   }, 0);

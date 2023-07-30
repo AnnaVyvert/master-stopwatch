@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   getRefUpperNote().value = presentLapStore?.note ?? '';
 
-  console.log(presentLapStore);
   if (presentLapStore?.isPlaying) {
     start();
   }

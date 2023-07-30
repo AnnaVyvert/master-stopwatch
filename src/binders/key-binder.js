@@ -11,10 +11,8 @@ function bindKeys() {
   document.addEventListener('keydown', (ev) => {
     switch (ev.code) {
       case 'Space':
-        console.log(ev.target.nodeName, ev.target.nodeName === 'INPUT');
         if (ev.target.nodeName !== 'INPUT') {
           ACTION_JSON[ev.code]();
-          console.log(22);
         }
         break;
       case 'Enter':

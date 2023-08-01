@@ -10,12 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (presentLapStore?.time || presentLapStore?.time === 0) {
     if (presentLapStore?.isPlaying) {
-      // secCount = Math.floor(Date.now() / 1000) - Math.floor(presentLapStore.startTime / 1000);
-      secCount = presentLapStore.time;
-      secLap = presentLapStore.time;
+      secCount = Math.floor(Date.now() / 1000) - Math.floor(presentLapStore.startTime / 1000);
+      secLap = Math.floor(Date.now() / 1000) - Math.floor(presentLapStore.startTime / 1000);
+      // secCount = presentLapStore.time;
+      // secLap = presentLapStore.time;
     } else {
-      secCount = presentLapStore.time;
-      secLap = presentLapStore.time;
+      secCount = Math.floor(Date.now() / 1000) - Math.floor(presentLapStore.startTime / 1000);
+      secLap = Math.floor(Date.now() / 1000) - Math.floor(presentLapStore.startTime / 1000);
+      // secCount = presentLapStore.time;
+      // secLap = presentLapStore.time;
     }
   } else {
     if (presentLapStore?.startTime) {

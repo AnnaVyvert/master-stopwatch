@@ -126,9 +126,10 @@ function disableTime(id) {
 
 function submitLap() {
   const now = new Date();
+  const store = jsonCRUD(PRESENT_LAP_STORE_NAME).read()
   const timeData = {
     id: idCount,
-    startTime: now,
+    startTime: store.startTime ?? secCount - secCountPrev - now,
     time: secCount - secCountPrev,
     note: document.querySelector(NOTE_INPUT_CONTAINER).value.trim() || '-',
     disabled: false,
@@ -139,7 +140,7 @@ function submitLap() {
     tableRef: document.querySelector(LAPS_CONTAINER),
     isRowDisabled: false,
     rowId: timeData.id,
-    data: [timeData.id, dateToTimeFormat(now), secToTimeFormat(timeData.time), timeData.note, ACTION_BUTTONS(timeData.id, false)],
+    data: [timeData.id, dateToTimeFormat(timeData.startTime), secToTimeFormat(timeData.time), timeData.note, ACTION_BUTTONS(timeData.id, false)],
     editableData: [
       { width: 86, key: 'time', data: secToTimeFormat(timeData.time) },
       { width: 218, key: 'note', data: timeData.note },
@@ -176,5 +177,5 @@ function stopWatch() {
 
 function updateLabel(secCount) {
   getRefTotalTimer().textContent = secToTimeFormat(secCount);
-  getRefTitle().textContent = secToShortTimeFormat(secCount);
+  getRefTitle().textContent = secToTimeFormat(secCount);
 }

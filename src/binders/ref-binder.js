@@ -1,7 +1,3 @@
-function getRefTitle() {
-  return document.querySelector('title');
-}
-
 function getRefTotalTimer() {
   return document.querySelector('.total-time-container .total-time');
 }

@@ -60,6 +60,11 @@ function reset() {
   updateLapsTableVisibility();
 }
 
+function removePresentLapTime() {
+  jsonCRUD(PRESENT_LAP_STORE_NAME).update('startTime', Date.now())
+  location.reload();
+}
+
 function start() {
   isPlaying = true;
   updateButtonVisibility();
@@ -177,5 +182,5 @@ function stopWatch() {
 
 function updateLabel(secCount) {
   getRefTotalTimer().textContent = secToTimeFormat(secCount);
-  getRefTitle().textContent = secToTimeFormat(secCount);
+  document.title = secToTimeFormat(secCount);
 }

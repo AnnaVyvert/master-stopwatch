@@ -54,6 +54,7 @@ function reset() {
 
   idCount = findMaxIdInLapStore() + 1;
 
+  jsonCRUD(PRESENT_LAP_STORE_NAME).update('startTime', Date.now())
   sumTime = getSumTimeInLapStore();
 
   updateLabel(sumTime);

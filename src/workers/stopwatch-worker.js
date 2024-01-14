@@ -1,4 +1,3 @@
-var sumTime = 0;
 var secCountPrev = 0;
 var secCount = 0;
 var stopWatchInterval;
@@ -36,22 +35,25 @@ function reset() {
 
   snapshots = TIME_SNAPSHOTS_RESET();
   setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
-  sumTime = getSumTimeInLapStore();
+
+  updateTimeVars();
 
   updateLabel(sumTime);
   updateLapsTableVisibility();
 }
 
 function removePresentLapTime() {
-  secLap = 0;
   snapshots = TIME_SNAPSHOTS_RESET();
+
+  updateTimeVars();
+
   setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
 }
 
 function start() {
   snapshots.push(Date.now());
   jsonCRUD(TIME_SNAPSHOTS_STORE_NAME).updateArray(snapshots);
-  
+
   isPlaying = IsPlayingCheck();
   updateButtonVisibility();
   stopWatch();
@@ -106,7 +108,7 @@ function submitLap() {
     id: idCount,
     startTime: snapshots[0],
     time: getArraySumTime(snapshots),
-    note: document.querySelector(NOTE_INPUT_CONTAINER).value.trim() || '-',
+    note: getRefUpperNote().value.trim() || '-',
     disabled: false,
     position: idCount,
     protected: false,
@@ -128,7 +130,9 @@ function submitLap() {
   idCount++;
   secLap = 0;
 
-  document.querySelector(NOTE_INPUT_CONTAINER).value = '';
+  getRefUpperNote().value = '';
+  setValueToStore(PRESENT_NOTE_STORE_NAME, '');
+
   setNewValueToLapStore(timeData);
   updateLapsTableVisibility();
 }
@@ -140,8 +144,9 @@ function updateButtonVisibility() {
 
 function stopWatch() {
   stopWatchInterval = setInterval(() => {
-    updateLabel(secLap);
     secLap += 1;
+    sumTime += 1;
+    updateLabel(sumTime);
   }, 1000);
 }
 

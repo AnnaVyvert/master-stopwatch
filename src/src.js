@@ -1,3 +1,12 @@
+var PRESENT_NOTE_STORE_NAME = 'present-note';
+var TIME_SNAPSHOTS_STORE_NAME = 'time-snapshots';
+var TIME_SNAPSHOTS_RESET = () => [Date.now()];
+var TIME_SNAPSHOTS_DEFAULT = () => JSON.stringify(TIME_SNAPSHOTS_RESET());
+var snapshots = jsonCRUD(TIME_SNAPSHOTS_STORE_NAME, TIME_SNAPSHOTS_DEFAULT()).read();
+var secLap = 0;
+var isPlaying = false;
+var IsPlayingCheck = (arr=snapshots) => arr.length % 2 === 1;
+
 document.addEventListener('DOMContentLoaded', () => {
   updateLabel(0);
 
@@ -6,36 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
   updateTableFromLapStore();
   idCount = findMaxIdInLapStore() + 1;
 
-  const presentLapStore = jsonCRUD(PRESENT_LAP_STORE_NAME).read();
+  isPlaying = IsPlayingCheck();
+  updateButtonVisibility();
 
-  if (presentLapStore?.time || presentLapStore?.time === 0) {
-    if (presentLapStore?.isPlaying) {
-      secCount = Math.floor(Date.now() / 1000) - Math.floor(presentLapStore.startTime / 1000);
-      secLap = Math.floor(Date.now() / 1000) - Math.floor(presentLapStore.startTime / 1000);
-      // secCount = presentLapStore.time;
-      // secLap = presentLapStore.time;
-    } else {
-      secCount = Math.floor(Date.now() / 1000) - Math.floor(presentLapStore.startTime / 1000);
-      secLap = Math.floor(Date.now() / 1000) - Math.floor(presentLapStore.startTime / 1000);
-      // secCount = presentLapStore.time;
-      // secLap = presentLapStore.time;
-    }
-  } else {
-    if (presentLapStore?.startTime) {
-      secCount = Math.floor(Date.now() / 1000) - Math.floor(presentLapStore.startTime / 1000);
-    } else {
-      secCount = 0;
-    }
+  getRefUpperNote().value = localStorage.getItem(PRESENT_NOTE_STORE_NAME) ?? '';
+
+  secLap += getArraySumTime(snapshots);
+  updateLabel(secLap);
+  if (isPlaying) {
+    stopWatch();
   }
-
-  getRefUpperNote().value = presentLapStore?.note ?? '';
-
-  if (presentLapStore?.isPlaying) {
-    start();
-  }
-  console.warn(sumTime, secCount ?? 0);
-  sumTime += secCount;
-  updateLabel(sumTime);
 
   getRefUpperNote().addEventListener('input', noteHandleEvent);
 });

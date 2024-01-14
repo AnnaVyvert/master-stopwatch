@@ -30,3 +30,17 @@ function timeFormatToSec(timeFormat) {
   const [hours, minutes, seconds] = timeFormat.split(':');
   return hours * HOUR + minutes * MINUTE + seconds * 1;
 }
+
+function getArraySumTime(arr) {
+  let elapseTime = 0;
+  if (arr.length===0) return 0;
+
+  let arrEven = arr.filter((e,i)=>i%2===0);
+  let arrOdd = arr.filter((e,i)=>i%2===1);
+
+  for (let i=0; i<arrEven.length; i++) {
+    elapseTime += (arrOdd[i] ?? Date.now()) - arrEven[i];
+  }
+
+  return Math.floor(elapseTime / 1000);
+}

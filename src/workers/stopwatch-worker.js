@@ -1,9 +1,6 @@
-var isPlaying = false;
-
 var sumTime = 0;
 var secCountPrev = 0;
 var secCount = 0;
-var secLap = 0;
 var stopWatchInterval;
 
 var LAPS_CONTAINER = '.laps-container table';
@@ -14,7 +11,6 @@ const DISABLED_ATTRIBUTE = '_disabled';
 var idCount = 1;
 
 var LAPS_STORE_NAME = 'lap-store';
-var PRESENT_LAP_STORE_NAME = 'present-lap';
 
 var lockedIcon = 'fa-lock';
 var unlockedIcon = 'fa-lock-open';
@@ -24,22 +20,6 @@ var ACTION_BUTTONS = (rowId, isLocked) => `
   <button id=${rowId} onclick="deleteTime(id)" class="delete"><i class="fa-solid fa-trash"></i></button>
   <button id=${rowId} onclick="disableTime(id)" class="disable"><i class="fa-solid fa-eye-slash"></i></button>
 `;
-
-function controlPanel() {
-  return {
-    start: () => {
-      isPlaying = true;
-      updateButtonVisibility();
-      stopWatch();
-    },
-    stop: () => {
-      isPlaying = false;
-      updateButtonVisibility();
-      clearInterval(stopWatchInterval);
-    },
-    submit: () => {},
-  };
-}
 
 function reset() {
   let store = preprocessLapStore();
@@ -54,7 +34,8 @@ function reset() {
 
   idCount = findMaxIdInLapStore() + 1;
 
-  jsonCRUD(PRESENT_LAP_STORE_NAME).update('startTime', Date.now())
+  snapshots = TIME_SNAPSHOTS_RESET();
+  setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
   sumTime = getSumTimeInLapStore();
 
   updateLabel(sumTime);
@@ -62,37 +43,27 @@ function reset() {
 }
 
 function removePresentLapTime() {
-  jsonCRUD(PRESENT_LAP_STORE_NAME).update('startTime', Date.now())
-  location.reload();
+  secLap = 0;
+  snapshots = TIME_SNAPSHOTS_RESET();
+  setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
 }
 
 function start() {
-  isPlaying = true;
+  snapshots.push(Date.now());
+  jsonCRUD(TIME_SNAPSHOTS_STORE_NAME).updateArray(snapshots);
+  
+  isPlaying = IsPlayingCheck();
   updateButtonVisibility();
   stopWatch();
-
-  if (secCount === 0) {
-    jsonCRUD(PRESENT_LAP_STORE_NAME).create({
-      startTime: Date.now(),
-      note: getRefUpperNote().value,
-      time: null,
-      isPlaying: true,
-    });
-  } else {
-    jsonCRUD(PRESENT_LAP_STORE_NAME).update('isPlaying', true);
-
-    const presentLapStore = jsonCRUD(PRESENT_LAP_STORE_NAME).read();
-    if (presentLapStore.isPlaying) {
-    }
-  }
 }
 
 function stop() {
-  isPlaying = false;
+  snapshots.push(Date.now());
+  jsonCRUD(TIME_SNAPSHOTS_STORE_NAME).updateArray(snapshots);
+
+  isPlaying = IsPlayingCheck();
   updateButtonVisibility();
   clearInterval(stopWatchInterval);
-
-  jsonCRUD(PRESENT_LAP_STORE_NAME).update('isPlaying', false);
 }
 
 function protectLap(id) {
@@ -131,12 +102,10 @@ function disableTime(id) {
 }
 
 function submitLap() {
-  const now = new Date();
-  const store = jsonCRUD(PRESENT_LAP_STORE_NAME).read()
   const timeData = {
     id: idCount,
-    startTime: store.startTime ?? secCount - secCountPrev - now,
-    time: secCount - secCountPrev,
+    startTime: snapshots[0],
+    time: getArraySumTime(snapshots),
     note: document.querySelector(NOTE_INPUT_CONTAINER).value.trim() || '-',
     disabled: false,
     position: idCount,
@@ -153,12 +122,10 @@ function submitLap() {
     ],
   });
 
-  jsonCRUD(PRESENT_LAP_STORE_NAME).update('startTime', Date.now());
-  jsonCRUD(PRESENT_LAP_STORE_NAME).update('time', 0);
-  jsonCRUD(PRESENT_LAP_STORE_NAME).update('note', '');
+  snapshots = TIME_SNAPSHOTS_RESET();
+  setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
 
   idCount++;
-  secCountPrev = secCount;
   secLap = 0;
 
   document.querySelector(NOTE_INPUT_CONTAINER).value = '';
@@ -173,11 +140,8 @@ function updateButtonVisibility() {
 
 function stopWatch() {
   stopWatchInterval = setInterval(() => {
-    secCount++;
-    sumTime++;
-    secLap++;
-    jsonCRUD(PRESENT_LAP_STORE_NAME).update('time', secLap);
-    updateLabel(sumTime);
+    updateLabel(secLap);
+    secLap += 1;
   }, 1000);
 }
 

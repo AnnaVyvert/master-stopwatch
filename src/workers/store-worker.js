@@ -23,6 +23,9 @@ function jsonCRUD(storeName, defaultValue = '{}') {
       store[key] = value;
       setValueToStore(storeName, JSON.stringify(store, undefined, 2));
     },
+    updateArray: (arr) => {
+      setValueToStore(storeName, JSON.stringify(arr));
+    },
     delete: () => {
       window.localStorage.removeItem(storeName);
     },
@@ -110,7 +113,6 @@ function updateTableFromLapStore() {
       ],
     });
   });
-  sumTime = getSumTimeInLapStore();
 
   updateLabel(sumTime);
 }

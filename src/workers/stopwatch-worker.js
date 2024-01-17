@@ -37,15 +37,19 @@ function reset() {
   setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
 
   updateTimeVars();
+  updateButtonVisibility();
 
-  updateLabel(sumTime);
+  updateIsPlaying();
   updateLapsTableVisibility();
 }
 
 function removePresentLapTime() {
+  secLap=0;
   snapshots = TIME_SNAPSHOTS_RESET();
 
   updateTimeVars();
+  updateIsPlaying();
+  updateButtonVisibility();
 
   setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
 }
@@ -54,7 +58,7 @@ function start() {
   snapshots.push(Date.now());
   jsonCRUD(TIME_SNAPSHOTS_STORE_NAME).updateArray(snapshots);
 
-  isPlaying = IsPlayingCheck();
+  updateIsPlaying();
   updateButtonVisibility();
   stopWatch();
 }
@@ -63,7 +67,7 @@ function stop() {
   snapshots.push(Date.now());
   jsonCRUD(TIME_SNAPSHOTS_STORE_NAME).updateArray(snapshots);
 
-  isPlaying = IsPlayingCheck();
+  updateIsPlaying();
   updateButtonVisibility();
   clearInterval(stopWatchInterval);
 }

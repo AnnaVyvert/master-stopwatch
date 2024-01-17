@@ -1,16 +1,18 @@
 var PRESENT_NOTE_STORE_NAME = 'present-note';
 var TIME_SNAPSHOTS_STORE_NAME = 'time-snapshots';
-var TIME_SNAPSHOTS_RESET = () => [Date.now()];
-var TIME_SNAPSHOTS_DEFAULT = () => JSON.stringify(TIME_SNAPSHOTS_RESET());
-var snapshots = jsonCRUD(TIME_SNAPSHOTS_STORE_NAME, TIME_SNAPSHOTS_DEFAULT()).read();
+var snapshots = jsonCRUD(TIME_SNAPSHOTS_STORE_NAME, [Date.now()]).read();
 var sumTime = 0;
 var secLap = 0;
 var isPlaying = false;
 var IsPlayingCheck = (arr=snapshots) => arr.length % 2 === 1;
+var updateIsPlaying = () => isPlaying = IsPlayingCheck();
+var TIME_SNAPSHOTS_RESET = () => IsPlayingCheck()? [Date.now()] : [Date.now(), Date.now()];
+var TIME_SNAPSHOTS_DEFAULT = () => JSON.stringify(TIME_SNAPSHOTS_RESET());
 
 function updateTimeVars() {
   secLap = getArraySumTime(snapshots);
   sumTime = secLap + getSumTimeInLapStore();
+  updateLabel(sumTime);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -21,14 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
   updateTableFromLapStore();
   idCount = findMaxIdInLapStore() + 1;
 
-  isPlaying = IsPlayingCheck();
+  updateIsPlaying();
   updateButtonVisibility();
 
   getRefUpperNote().value = localStorage.getItem(PRESENT_NOTE_STORE_NAME) ?? '';
 
   updateTimeVars();
 
-  updateLabel(sumTime);
   if (isPlaying) {
     stopWatch();
   }

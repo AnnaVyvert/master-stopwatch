@@ -33,7 +33,8 @@ function reset() {
 
   idCount = findMaxIdInLapStore() + 1;
 
-  snapshots = TIME_SNAPSHOTS_RESET();
+  secLap=0;
+  TIME_SNAPSHOTS_RESET();
   setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
 
   updateTimeVars();
@@ -45,7 +46,7 @@ function reset() {
 
 function removePresentLapTime() {
   secLap=0;
-  snapshots = TIME_SNAPSHOTS_RESET();
+  TIME_SNAPSHOTS_RESET();
 
   updateTimeVars();
   updateIsPlaying();
@@ -128,12 +129,12 @@ function submitLap() {
     ],
   });
 
-  snapshots = TIME_SNAPSHOTS_RESET();
-  setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
-
-  idCount++;
   secLap = 0;
+  TIME_SNAPSHOTS_RESET();
+  updateTimeVars();
+  idCount++;
 
+  setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
   getRefUpperNote().value = '';
   setValueToStore(PRESENT_NOTE_STORE_NAME, '');
 

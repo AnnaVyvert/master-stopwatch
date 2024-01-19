@@ -129,9 +129,7 @@ function submitLap() {
     ],
   });
 
-  secLap = 0;
   TIME_SNAPSHOTS_RESET();
-  updateTimeVars();
   idCount++;
 
   setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
@@ -139,6 +137,9 @@ function submitLap() {
   setValueToStore(PRESENT_NOTE_STORE_NAME, '');
 
   setNewValueToLapStore(timeData);
+
+  updateTimeVars();
+
   updateLapsTableVisibility();
 }
 

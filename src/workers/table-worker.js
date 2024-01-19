@@ -1,6 +1,7 @@
 const ROW_ID = 'row_';
 
 function editCell(rowId, id, key) {
+  if (getRefAction(rowId).isLocked) return;
   const spanRef = document.querySelector(`tr#${ROW_ID}${rowId} span[id="${id}"]`);
   const inputRef = document.querySelector(`tr#${ROW_ID}${rowId} input[id="${id}"]`);
   if (spanRef.textContent && spanRef.textContent !== '-') {

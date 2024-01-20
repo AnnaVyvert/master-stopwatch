@@ -39,23 +39,20 @@ function tableAddRow({ tableRef, isRowDisabled, rowId, data, editableData }) {
       ${el.data}
     </span>`;
   });
-
-  tableRef.innerHTML =
-    `
-      <tr id=${ROW_ID}${rowId} ${isRowDisabled ? DISABLED_ATTRIBUTE : ''}>
-        <td>
-          ${data.map((e) => e).join('</td><td>')}
-        </td>
-      </tr>
-    ` + tableRef.innerHTML;
+  const tbodySplitted = tableRef.innerHTML.split('<tbody>');
+  const newRow = `
+    <tr draggable="true" id=${ROW_ID}${rowId} ${isRowDisabled ? DISABLED_ATTRIBUTE : ''}>
+      <td class="drag-point">⣿</td>
+      <td>
+        ${data.map((e) => e).join('</td><td>')}
+      </td>
+    </tr>
+  `
+  tableRef.innerHTML = tbodySplitted[0] + newRow + tbodySplitted[1];
 }
 
 function updateLapsTableVisibility() {
   const lapsContainerRef = document.querySelector('section.laps-container');
-  // let store = getValueFromStore(LAPS_STORE_NAME);
-  // if (!store) return (lapsContainerRef.hidden = true);
-  // store = JSON.parse(store);
-  // if (isArrayEmpty(store)) return (lapsContainerRef.hidden = true);
   let store = preprocessLapStore();
   if (!store) return (lapsContainerRef.hidden = true);
   lapsContainerRef.hidden = false;

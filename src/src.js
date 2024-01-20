@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateLapsTableVisibility();
   bindKeys();
-  updateTableFromLapStore();
+  setupTableFromLapStore();
+
   idCount = findMaxIdInLapStore() + 1;
 
   updateIsPlaying();
@@ -35,4 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   getRefUpperNote().addEventListener('input', noteHandleEvent);
+
+  bindDragAndDrop();
 });

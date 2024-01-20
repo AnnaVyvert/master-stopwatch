@@ -24,7 +24,7 @@
       <input class="note" type="text" placeholder="note" />
       <button onclick="submitLap()" class="submit"><i class="fa-solid fa-check"></i></button>
       <button onclick="removePresentLapTime()" class="remove-present-lap"><i class="fa-solid fa-xmark"></i></button>
-      <button onclick="location.reload()"><i class="fa-solid fa-rotate-right"></i></button>
+      <button onclick="location.reload()"><i class="fa-solid fa-sync"></i></button>
     </section>
     <section class="add-panel-container">
       <div></div>
@@ -35,6 +35,7 @@
     <section class="laps-container" hidden>
       <table>
         <thead>
+          <th></th>
           <th>lap</th>
           <th>start time</th>
           <th>time</th>
@@ -58,6 +59,8 @@
 
   <script src="src/workers/lap-store-worker.js"></script>
   <script src="src/workers/stopwatch-worker.js"></script>
+
+  <script src="src/workers/drag-and-drop.js"></script>
 
   <script src="src/src.js"></script>
 </html>

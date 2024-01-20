@@ -97,9 +97,10 @@ function getValueFromLapStore(id) {
   return store.find((el) => el.id === id);
 }
 
-function updateTableFromLapStore() {
+function setupTableFromLapStore() {
   let store = preprocessLapStore();
   if (!store) return;
+  document.querySelector(LAPS_CONTAINER_TBODY).innerHTML = '';
 
   store.reverse().forEach((el) => {
     tableAddRow({
@@ -113,6 +114,4 @@ function updateTableFromLapStore() {
       ],
     });
   });
-
-  updateLabel(sumTime);
 }

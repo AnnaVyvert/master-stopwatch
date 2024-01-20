@@ -57,7 +57,7 @@ span.note {
 }
 
 .laps-container {
-  max-width: 775px;
+  max-width: 800px;
   margin: auto;
 }
 
@@ -72,4 +72,21 @@ thead th:nth-child(4) {
 thead th:nth-child(5) {
   visibility: hidden;
   width: 200px;
+}
+
+.drag-point {
+  cursor: grab;
+}
+
+tbody tr {
+  opacity: 1;
+  background-color: var(--aubergine-dark);
+}
+
+.dragging {
+  opacity: 0.4;
+}
+
+.over-to-drop {
+  background-color: var(--aubergine-mid);
 }

@@ -24,3 +24,16 @@ function preprocessLapStore() {
 
   return store;
 }
+
+function swapLaps(id1, id2) {
+  let store = preprocessLapStore();
+  const lapId1 = store.findIndex(e=>e.id===id1);
+  const lapId2 = store.findIndex(e=>e.id===id2);
+  swapEls(store, lapId1, lapId2);
+  setValueToStore(LAPS_STORE_NAME, JSON.stringify(store));
+}
+
+function swapEls(arr, i1, i2) {
+  // arr is mutable
+  [arr[i1], arr[i2]] = [arr[i2], arr[i1]];
+}

@@ -3,6 +3,8 @@ var secCount = 0;
 var stopWatchInterval;
 
 var LAPS_CONTAINER = '.laps-container table';
+var LAPS_CONTAINER_TBODY = '.laps-container table tbody';
+var LAPS_CONTAINER_TBODY_TR = '.laps-container table tbody tr';
 var NOTE_INPUT_CONTAINER = '.control-panel input.note';
 
 const DISABLED_ATTRIBUTE = '_disabled';

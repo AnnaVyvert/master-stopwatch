@@ -25,6 +25,10 @@
       <button onclick="submitLap()" class="submit"><i class="fa-solid fa-check"></i></button>
       <button onclick="removePresentLapTime()" class="remove-present-lap"><i class="fa-solid fa-xmark"></i></button>
       <button onclick="location.reload()"><i class="fa-solid fa-sync"></i></button>
+      <button onclick=""><i class="fa-solid fa-file"></i></button>
+      <button onclick="exportDataHandler()"><i class="fa-solid fa-file-arrow-down"></i></button>
+      <button onclick="uploadFileRedirect()"><i class="fa-solid fa-file-arrow-up"></i></button>
+      <input type="file" multiple accept=".json" style="display: none;"/>
     </section>
     <section class="add-panel-container">
       <div></div>
@@ -46,7 +50,7 @@
       </table>
     </section>
     <div class="center">
-      <button onclick='reset()' class="reset"><i class="fa-solid fa-trash"></i></button>
+      <button onclick='removeAll()' class="reset"><i class="fa-solid fa-trash"></i></button>
     </div>
   </body>
   <script src="src/binders/input-binder.js"></script>
@@ -61,6 +65,8 @@
   <script src="src/workers/stopwatch-worker.js"></script>
 
   <script src="src/workers/drag-and-drop.js"></script>
+  <script src="src/workers/file-utils.js"></script>
+  <script src="src/workers/handlers.js"></script>
 
   <script src="src/src.js"></script>
 </html>

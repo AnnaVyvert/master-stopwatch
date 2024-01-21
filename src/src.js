@@ -36,6 +36,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   getRefUpperNote().addEventListener('input', noteHandleEvent);
-
-  bindDragAndDrop();
 });

@@ -22,14 +22,14 @@ var ACTION_BUTTONS = (rowId, isLocked) => `
   <button id=${rowId} onclick="disableTime(id)" class="disable"><i class="fa-solid fa-eye-slash"></i></button>
 `;
 
-function reset() {
+function removeAll() {
   let store = preprocessLapStore();
   if (!store) return;
 
   store.forEach((el) => {
     if (getRefAction(el.id).isLocked) return;
     store = store.filter((lap) => lap.id !== el.id);
-    getRowRef(el.id).parentElement.remove();
+    getRowRef(el.id).remove();
     deleteValueFromLapStore(el.id);
   });
 
@@ -143,6 +143,7 @@ function submitLap() {
   updateTimeVars();
 
   updateLapsTableVisibility();
+  bindDragAndDrop();
 }
 
 function updateButtonVisibility() {

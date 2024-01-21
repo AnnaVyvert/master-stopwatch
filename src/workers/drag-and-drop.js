@@ -54,7 +54,6 @@ function handleDrop(e) {
   const dropSrcElId = Number(dropSrcEl.id.split(ROW_ID)[1]);
   swapLaps(dragSrcElId, dropSrcElId);
   setupTableFromLapStore();
-  bindDragAndDrop();
 
   return false;
 }

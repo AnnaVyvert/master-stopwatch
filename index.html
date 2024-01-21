@@ -25,9 +25,11 @@
       <button onclick="submitLap()" class="submit"><i class="fa-solid fa-check"></i></button>
       <button onclick="removePresentLapTime()" class="remove-present-lap"><i class="fa-solid fa-xmark"></i></button>
       <button onclick="location.reload()"><i class="fa-solid fa-sync"></i></button>
-      <button onclick=""><i class="fa-solid fa-file"></i></button>
-      <button onclick="exportDataHandler()"><i class="fa-solid fa-file-arrow-down"></i></button>
-      <button onclick="uploadFileRedirect()"><i class="fa-solid fa-file-arrow-up"></i></button>
+      <button onclick="switchFilesFunctionality()" class="file-functionality-open"><i class="fa-solid fa-file"></i></button>
+      <span class="file-functionality-panel" onclick="switchFilesFunctionality()" hidden>
+        <button onclick="exportDataHandler()"><i class="fa-solid fa-file-arrow-down"></i></button>
+        <button onclick="uploadFileRedirect()"><i class="fa-solid fa-file-arrow-up"></i></button>
+      </span>
       <input type="file" multiple accept=".json" style="display: none;"/>
     </section>
     <section class="add-panel-container">

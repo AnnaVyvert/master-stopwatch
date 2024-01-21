@@ -21,3 +21,15 @@ function uploadFileHandler(res) {
 function uploadFileRedirect() {
   document.querySelector(UPLOAD_FILE_REF).click();
 }
+
+const FILE_FUNCTIONALITY_REF = ".file-functionality-open";
+const FILE_FUNCTIONALITY_PANEL_REF = ".file-functionality-panel";
+function switchFilesFunctionality() {
+  if (document.querySelector(FILE_FUNCTIONALITY_REF).hidden) {
+    document.querySelector(FILE_FUNCTIONALITY_REF).hidden = false;
+    document.querySelector(FILE_FUNCTIONALITY_PANEL_REF).hidden = true;
+  } else {
+    document.querySelector(FILE_FUNCTIONALITY_PANEL_REF).hidden = false;
+    document.querySelector(FILE_FUNCTIONALITY_REF).hidden = true;
+  }
+}

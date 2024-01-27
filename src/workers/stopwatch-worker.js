@@ -6,6 +6,7 @@ var LAPS_CONTAINER = '.laps-container table';
 var LAPS_CONTAINER_TBODY = '.laps-container table tbody';
 var LAPS_CONTAINER_TBODY_TR = '.laps-container table tbody tr';
 var NOTE_INPUT_CONTAINER = '.control-panel input.note';
+var NOTE_CONTENT_EMPTY = '-';
 
 const DISABLED_ATTRIBUTE = '_disabled';
 
@@ -115,7 +116,7 @@ function submitLap() {
     id: idCount,
     startTime: snapshots[0],
     time: getArraySumTime(snapshots),
-    note: getRefUpperNote().value.trim() || '-',
+    note: getRefUpperNote().value.trim() || NOTE_CONTENT_EMPTY,
     disabled: false,
     position: idCount,
     protected: false,
@@ -153,8 +154,9 @@ function updateButtonVisibility() {
 
 function stopWatch() {
   stopWatchInterval = setInterval(() => {
-    secLap += 1;
-    sumTime += 1;
+    let realSecLap = getArraySumTime(snapshots);
+    secLap = realSecLap;
+    sumTime = realSecLap + getSumTimeInLapStore();
     updateLabel(sumTime);
   }, 1000);
 }

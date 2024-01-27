@@ -4,15 +4,15 @@ function editCell(rowId, id, key) {
   if (getRefAction(rowId).isLocked) return;
   const spanRef = document.querySelector(`tr#${ROW_ID}${rowId} span[id="${id}"]`);
   const inputRef = document.querySelector(`tr#${ROW_ID}${rowId} input[id="${id}"]`);
-  if (spanRef.textContent && spanRef.textContent !== '-') {
+  if (spanRef.textContent && spanRef.textContent !== NOTE_CONTENT_EMPTY) {
     inputRef.value = spanRef.textContent;
   }
   spanRef.hidden = !spanRef.hidden;
   inputRef.hidden = !inputRef.hidden;
   inputRef.addEventListener('focusout', (ev) => {
     if (key === 'note') {
-      spanRef.textContent = inputRef.value.trim() || '-';
-      updateValueInLapStore(Number(rowId), key, inputRef.value.trim() || '-');
+      spanRef.textContent = inputRef.value.trim() || NOTE_CONTENT_EMPTY;
+      updateValueInLapStore(Number(rowId), key, inputRef.value.trim() || NOTE_CONTENT_EMPTY);
       inputRef.hidden = true;
       spanRef.hidden = false;
     } else if (key === 'time') {

@@ -52,8 +52,11 @@ function handleDrop(e) {
 
   const dragSrcElId = Number(dragSrcEl.id.split(ROW_ID)[1]);
   const dropSrcElId = Number(dropSrcEl.id.split(ROW_ID)[1]);
-  swapLaps(dragSrcElId, dropSrcElId);
-  setupTableFromLapStore();
+  if (dragSrcElId === dropSrcElId) return;
 
+  // swapLaps(dragSrcElId, dropSrcElId);
+  mergeLaps(dragSrcElId, dropSrcElId)
+  setupTableFromLapStore();
+  updateTimeVars();
   return false;
 }

@@ -31,6 +31,14 @@
         <button onclick="uploadFileRedirect()"><i class="fa-solid fa-file-arrow-up"></i></button>
       </span>
       <input type="file" multiple accept=".json" style="display: none;"/>
+      <button onclick="handleAsideNotePopup()" class="aside-notes"><i class="fa-solid fa-note-sticky"></i></button>
+      <dialog class="popup aside-note">
+        <div class="close-button">
+          <i class="fa-solid fa-xmark" onclick="handleAsideNotePopup()"></i>
+        </div>
+        <div>aside notes:</div>
+        <div><textarea id="aside-note" cols="30" rows="10"></textarea></div>
+      </dialog>
     </section>
     <section class="add-panel-container">
       <div></div>
@@ -55,7 +63,6 @@
       <button onclick='removeAll()' class="reset"><i class="fa-solid fa-trash"></i></button>
     </div>
   </body>
-  <script src="src/binders/input-binder.js"></script>
   <script src="src/binders/key-binder.js"></script>
   <script src="src/binders/ref-binder.js"></script>
 
@@ -69,6 +76,7 @@
   <script src="src/workers/drag-and-drop.js"></script>
   <script src="src/workers/file-utils.js"></script>
   <script src="src/workers/handlers.js"></script>
+  <script src="src/workers/common-utils.js"></script>
 
   <script src="src/src.js"></script>
 </html>

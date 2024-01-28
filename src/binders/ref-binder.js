@@ -6,6 +6,10 @@ function getRefUpperNote() {
   return document.querySelector(`.control-panel input.note`);
 }
 
+function getRefAsideNote() {
+  return document.querySelector(`.popup.aside-note textarea`);
+}
+
 function getRefSubmitBtn() {
   return document.querySelector(`.control-panel button.submit`);
 }

@@ -4,9 +4,9 @@ var snapshots = jsonCRUD(TIME_SNAPSHOTS_STORE_NAME, [Date.now()]).read();
 var sumTime = 0;
 var secLap = 0;
 var isPlaying = false;
-var IsPlayingCheck = (arr=snapshots) => arr.length % 2 === 1;
+var IsPlayingCheck = (arr = snapshots) => arr.length % 2 === 1;
 var updateIsPlaying = () => isPlaying = IsPlayingCheck();
-var TIME_SNAPSHOTS_RESET = () => snapshots = IsPlayingCheck()? [Date.now()] : [Date.now(), Date.now()];
+var TIME_SNAPSHOTS_RESET = () => snapshots = IsPlayingCheck() ? [Date.now()] : [Date.now(), Date.now()];
 var TIME_SNAPSHOTS_DEFAULT = () => JSON.stringify(TIME_SNAPSHOTS_RESET());
 
 function updateTimeVars() {
@@ -27,7 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
   updateIsPlaying();
   updateButtonVisibility();
 
-  getRefUpperNote().value = localStorage.getItem(PRESENT_NOTE_STORE_NAME) ?? '';
+  getRefUpperNote().value = getValueFromStore(PRESENT_NOTE_STORE_NAME) ?? '';
+  getRefAsideNote().value = getValueFromStore(ASIDE_NOTE_STORE_NAME) ?? '';
+
+  console.log(getValueFromStore(ASIDE_NOTE_SIZE_STORE_NAME));
+
+  const asideNoteSize = JSON.parse(getValueFromStore(ASIDE_NOTE_SIZE_STORE_NAME)) ?? [200, 200];
+  getRefAsideNote().style = `width: ${asideNoteSize[0]}px; height: ${asideNoteSize[1]}px;`;
 
   updateTimeVars();
 
@@ -35,5 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     stopWatch();
   }
 
-  getRefUpperNote().addEventListener('input', noteHandleEvent);
+  getRefUpperNote().addEventListener('input', upperNoteHandleEvent);
+  getRefAsideNote().addEventListener('input', asideNoteHandleEvent);
+  new ResizeObserver(debounce(handleSizeChange)).observe(getRefAsideNote())
 });

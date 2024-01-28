@@ -55,10 +55,5 @@ var ASIDE_NOTE_SIZE_STORE_NAME = 'aside-note-size';
 
 function handleAsideNotePopup() {
   const isOpen = document.querySelector(POPUP_REF + ASIDE_NOTE_REF).open;
-  if (!isOpen) {
-    document.querySelector(POPUP_REF + ASIDE_NOTE_REF).classList.remove('closed');
-  } else {
-    document.querySelector(POPUP_REF + ASIDE_NOTE_REF).classList.add('closed');
-  }
   document.querySelector(POPUP_REF + ASIDE_NOTE_REF).open = !isOpen;
 }

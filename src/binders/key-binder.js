@@ -5,6 +5,10 @@ const ACTION_JSON = {
   Enter: () => {
     getRefSubmitBtn().click();
   },
+  Escape: () => {
+    const popups = Array.from(document.querySelectorAll(POPUP_REF));
+    popups.forEach(e => e.open = false);
+  }
 };
 
 function bindKeys() {
@@ -19,6 +23,9 @@ function bindKeys() {
         if (!ev.target.id.length) {
           ACTION_JSON[ev.code]();
         }
+        break;
+      case 'Escape':
+        ACTION_JSON[ev.code]();
         break;
     }
   });

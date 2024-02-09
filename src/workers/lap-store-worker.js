@@ -48,13 +48,12 @@ function mergeNotes(note1, note2) {
   } else if (note1 === NOTE_CONTENT_EMPTY && note2 === NOTE_CONTENT_EMPTY) {
     return NOTE_CONTENT_EMPTY
   } else {
-    return note1.length === NOTE_CONTENT_EMPTY ? note2 : note1;
+    return note1 === NOTE_CONTENT_EMPTY ? note2 : note1;
   }
 }
 
 function mergeLaps(id1, id2) {
   let store = preprocessLapStore();
-  console.log(store, id1, id2);
   const dragLapId = store.findIndex(e => e.id === id1);
   const dropLapId = store.findIndex(e => e.id === id2);
   const dragLap = store[dragLapId];

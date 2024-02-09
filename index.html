@@ -39,6 +39,28 @@
         <div>aside notes:</div>
         <div><textarea id="aside-note" cols="30" rows="10"></textarea></div>
       </dialog>
+      <button onclick="handleEditPresentLapTimePopup()">
+        <i class="fa-regular fa-clock"></i>
+      </button>
+      <dialog class="popup edit-present-lap-time">
+        <div>edit present lap time:</div>
+        <div>
+          <span class="edit-present-lap-totaltime"></span>
+          <select>
+            <option value="+">+</option>
+            <option value="-">-</option>
+          </select>
+          <input type="text" id="time-diff" style="width: 70px; text-align: center;">
+        </div>
+        <div style="margin-top: 16px;">
+          <button onclick="handleEditPresentLapTimePopup()">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <button onclick="handleEditPresentLapTime()">
+            <i class="fa-solid fa-check"></i>
+          </button>
+        </div>
+      </dialog>
     </section>
     <section class="add-panel-container">
       <div></div>

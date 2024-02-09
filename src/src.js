@@ -30,8 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
   getRefUpperNote().value = getValueFromStore(PRESENT_NOTE_STORE_NAME) ?? '';
   getRefAsideNote().value = getValueFromStore(ASIDE_NOTE_STORE_NAME) ?? '';
 
-  console.log(getValueFromStore(ASIDE_NOTE_SIZE_STORE_NAME));
-
   const asideNoteSize = JSON.parse(getValueFromStore(ASIDE_NOTE_SIZE_STORE_NAME)) ?? [200, 200];
   getRefAsideNote().style = `width: ${asideNoteSize[0]}px; height: ${asideNoteSize[1]}px;`;
 

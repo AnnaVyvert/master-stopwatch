@@ -154,11 +154,15 @@ function updateButtonVisibility() {
 
 function stopWatch() {
   stopWatchInterval = setInterval(() => {
-    let realSecLap = getArraySumTime(snapshots);
-    secLap = realSecLap;
-    sumTime = realSecLap + getSumTimeInLapStore();
-    updateLabel(sumTime);
+    updateTime();
   }, 1000);
+}
+
+function updateTime() {
+  let realSecLap = getArraySumTime(snapshots);
+  secLap = realSecLap;
+  sumTime = realSecLap + getSumTimeInLapStore();
+  updateLabel(sumTime);
 }
 
 function updateLabel(secCount) {

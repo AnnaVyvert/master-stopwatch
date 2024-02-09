@@ -44,3 +44,28 @@ function getArraySumTime(arr) {
 
   return Math.floor(elapseTime / 1000);
 }
+
+function lexisTimeToSec(lexis) {
+  const labelToSec = {
+    "s": 1,
+    "m": 60,
+    "h": 60 * 60,
+    "d": 60 * 60 * 24,
+  }
+
+  let secCount = 0;
+  const numbersOnly = String(Number(lexis.replace(/\D/g, '')));
+
+  if (numbersOnly.length < lexis.length - 1) {
+    throw new Error('invalid lexis format');
+  }
+  if (numbersOnly.length === lexis.length) {
+    secCount = labelToSec['m'] * Number(numbersOnly);
+  } else if (numbersOnly.length === lexis.length - 1) {
+    secCount = labelToSec[lexis.at(-1)] * Number(numbersOnly);
+  } else {
+    throw new Error('lexis unhandled exception');
+  }
+  
+  return secCount;
+}

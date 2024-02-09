@@ -100,10 +100,7 @@ tbody tr {
   background-color: var(--aubergine-mid);
   animation: fade-in 0.3s ease 1 forwards;
   padding: 4px 16px 16px 16px;
-}
-
-.popup.closed {
-  animation: fade-out 0.4s ease 1 forwards;
+  z-index: 1;
 }
 
 .aside-note {
@@ -114,6 +111,17 @@ tbody tr {
 .aside-note textarea {
   color: white;
   background-color: var(--aubergine-dark);
+}
+
+.edit-present-lap-time .input-invalid {
+  border: 1px solid red;
+}
+
+select {
+  background-color: var(--aubergine-mid);
+  border-radius: 4px;
+  color: white;
+  border: 1px solid white;
 }
 
 .close-button {

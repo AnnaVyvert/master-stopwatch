@@ -35,7 +35,7 @@ button.reset {
 }
 
 .control-panel input.note {
-  height: 36px;
+  height: 18px;
   padding: 8px;
   border: 1px solid lightgrey;
   border-radius: 4px;
@@ -92,7 +92,7 @@ tbody tr {
   background-color: var(--aubergine-mid);
 }
 
-.popup {
+dialog.popup {
   transition: 0.4s;
   color: white;
   border: 2px solid var(--gray-warm);
@@ -101,6 +101,11 @@ tbody tr {
   animation: fade-in 0.3s ease 1 forwards;
   padding: 4px 16px 16px 16px;
   z-index: 1;
+}
+
+dialog::backdrop {
+  background-color: var(--aubergine-dark, #2C001E);
+  opacity: 0.5;
 }
 
 .aside-note {

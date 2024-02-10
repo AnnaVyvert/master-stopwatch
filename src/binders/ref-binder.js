@@ -17,7 +17,6 @@ const staticElsData = [
   { name: 'stopButton', selector: 'button.stop' },
   { name: 'uploadFile', selector: 'input[type=file]' },
   { name: 'lapsTable', selector: '.laps-container table' },
-  { name: 'lapsTbody', selector: '.laps-container table tbody' },
   { name: 'lapsContainer', selector: 'section.laps-container' },
   { name: 'fileFunctionalityOpen', selector: '.file-functionality-open' },
   { name: 'fileFunctionalityPanel', selector: '.file-functionality-panel' },
@@ -34,6 +33,12 @@ function collectStaticEls(elementsData = staticElsData) {
     staticEls[el.name] = getDocumentQS(el.selector);
   });
   console.log(staticEls);
+};
+
+var dynamicEls = {
+  popups: () => Array.from(document.querySelectorAll('dialog.popup')),
+  tbody: () => getDocumentQS('.laps-container table tbody'),
+  lapTableRows: () => Array.from(document.querySelectorAll('.laps-container table tbody tr')),
 };
 
 function getRowRef(id) {

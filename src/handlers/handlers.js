@@ -33,23 +33,14 @@ function upperNoteHandleEvent(ev) {
   localStorage.setItem(PRESENT_NOTE_STORE_NAME, ev.target.value ?? '');
 }
 
-function asideNoteHandleEvent(ev) {
-  localStorage.setItem(ASIDE_NOTE_STORE_NAME, ev.target.value ?? '');
-}
-
-function handleSizeChange() {
-  let el = staticEls.bigNote;
-  if ([el.offsetWidth, el.offsetHeight].includes(0)) return;
-  setValueToStore(ASIDE_NOTE_SIZE_STORE_NAME, JSON.stringify([el.offsetWidth, el.offsetHeight]));
- }
-
 var POPUP_REF = '.popup';
 var ASIDE_NOTE_STORE_NAME = 'aside-note';
 var ASIDE_NOTE_SIZE_STORE_NAME = 'aside-note-size';
 
+const toggleModal = (modal) => modal.open ? modal.close() : modal.showModal();
+
 function handleAsideNotePopup() {
-  const isOpen = staticEls.bigNotePopup.open;
-  staticEls.bigNotePopup.open = !isOpen;
+  toggleModal(staticEls.bigNotePopup)
   const inputRef = staticEls.bigNote;
   inputRef.focus();
 }
@@ -57,8 +48,7 @@ function handleAsideNotePopup() {
 function handleEditPresentLapTimePopup() {
   staticEls.editPresentLapTimeLabel.textContent = secToTimeFormat(sumTime);
   const inputRef = staticEls.editPresentLapTimeInput;
-  const isOpen = staticEls.editPresentLapTimePopup.open;
-  staticEls.editPresentLapTimePopup.open = !isOpen;
+  toggleModal(staticEls.editPresentLapTimePopup)
   inputRef.focus();
 }
 
@@ -70,7 +60,7 @@ function handleEditPresentLapTime() {
   setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
   updateTime();
   staticEls.editPresentLapTimeLabel.textContent = secToTimeFormat(sumTime);
-  staticEls.editPresentLapTimePopup.open = false;
+  staticEls.editPresentLapTimePopup.close();
 }
 
 const INVALID_INPUT_CLASS = 'input-invalid';

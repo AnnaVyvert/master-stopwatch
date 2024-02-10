@@ -5,8 +5,8 @@ const DRAGGING_CLASS = 'dragging';
 const OVER_DROP_CLASS = 'over-to-drop';
 
 function bindDragAndDrop() {
-  rows = document.querySelectorAll(LAPS_CONTAINER_TBODY_TR);
-  Array.from(rows).forEach(item => {
+  rows = dynamicEls.lapTableRows();
+  rows.forEach(item => {
     item.addEventListener('dragstart', handleDragStart);
     item.addEventListener('dragover', handleDragOver);
     item.addEventListener('dragenter', handleDragEnter);

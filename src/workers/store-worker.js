@@ -100,7 +100,7 @@ function getValueFromLapStore(id) {
 function setupTableFromLapStore() {
   let store = preprocessLapStore();
   if (!store) return;
-  staticEls.lapsTbody.innerHTML = '';
+  dynamicEls.tbody().innerHTML = '';
 
   store.reverse().forEach((el) => {
     tableAddRow({

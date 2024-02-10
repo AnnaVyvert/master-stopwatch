@@ -18,8 +18,7 @@ const keyActions = {
   Escape: {
     condition: (ev) => true,
     handler: () => {
-      const popups = Array.from(document.querySelectorAll(POPUP_REF));
-      popups.forEach(e => e.open = false);
+      dynamicEls.popups().forEach(e => e.close());
     }
   },
 }

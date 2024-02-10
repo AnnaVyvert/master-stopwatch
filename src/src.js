@@ -1,6 +1,6 @@
 var PRESENT_NOTE_STORE_NAME = 'present-note';
 var TIME_SNAPSHOTS_STORE_NAME = 'time-snapshots';
-var snapshots = jsonCRUD(TIME_SNAPSHOTS_STORE_NAME, [Date.now()]).read();
+var snapshots = jsonCRUD(TIME_SNAPSHOTS_STORE_NAME, `[${Date.now()}]`).read();
 var sumTime = 0;
 var secLap = 0;
 var isPlaying = false;
@@ -8,6 +8,7 @@ var IsPlayingCheck = (arr = snapshots) => arr.length % 2 === 1;
 var updateIsPlaying = () => isPlaying = IsPlayingCheck();
 var TIME_SNAPSHOTS_RESET = () => snapshots = IsPlayingCheck() ? [Date.now()] : [Date.now(), Date.now()];
 var TIME_SNAPSHOTS_DEFAULT = () => JSON.stringify(TIME_SNAPSHOTS_RESET());
+var resizing = false;
 
 function updateTimeVars() {
   secLap = getArraySumTime(snapshots);
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateLabel(0);
   updateLapsTableVisibility();
   bindKeyListener();
+  bindBackdropHandler();
   setupTableFromLapStore();
 
   idCount = findMaxIdInLapStore() + 1;
@@ -43,5 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   staticEls.presentLapNote.addEventListener('input', upperNoteHandleEvent);
   staticEls.bigNote.addEventListener('input', asideNoteHandleEvent);
+  staticEls.bigNote.addEventListener('mousedown', asideNoteMouseDownEvent);
   new ResizeObserver(debounce(handleSizeChange)).observe(staticEls.bigNote)
 });

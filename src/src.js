@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateLabel(0);
 
   updateLapsTableVisibility();
-  bindKeys();
+  bindKeyListener();
   setupTableFromLapStore();
 
   idCount = findMaxIdInLapStore() + 1;

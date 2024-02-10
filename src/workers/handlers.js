@@ -64,11 +64,13 @@ function handleEditPresentLapTimePopup() {
 
 function handleEditPresentLapTime() {
   const secDiff = getEditPresentLapTimeDiff();
+  if (isNaN(secDiff)) return -1;
 
   snapshots[0] += secDiff;
   setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
   updateTime();
   staticEls.editPresentLapTimeLabel.textContent = secToTimeFormat(sumTime);
+  staticEls.editPresentLapTimePopup.open = false;
 }
 
 const INVALID_INPUT_CLASS = 'input-invalid';
@@ -77,9 +79,8 @@ function getEditPresentLapTimeDiff() {
   const timeDiff = inputRef.value;
   const selectSign = staticEls.editPresentLapTimeSelect.value;
   const sign = selectSign === '+' ? 1 : -1;
-  // TODO: unhandled errors to invalid class
-  const secDiff = -sign * lexisTimeToSec(timeDiff) * 1000;
   try {
+    const secDiff = -sign * lexisTimeToSec(timeDiff) * 1000;
     if (getArraySumTime(snapshots) * 1000 < secDiff) {
       return inputRef.classList.add(INVALID_INPUT_CLASS);
     } else {

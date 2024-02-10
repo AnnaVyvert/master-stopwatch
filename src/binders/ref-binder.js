@@ -11,6 +11,7 @@ const staticElsData = [
   { name: 'editPresentLapTimeInput', selector: '.popup.edit-present-lap-time input' },
   { name: 'editPresentLapTimeSelect', selector: '.popup.edit-present-lap-time select' },
   { name: 'editPresentLapTimeLabel', selector: '.popup.edit-present-lap-time .edit-present-lap-totaltime' },
+  { name: 'editPresentLapSubmit', selector: '.popup.edit-present-lap-time .edit-present-lap-submit' },
   { name: 'presentLapSubmit', selector: '.control-panel button.submit' },
   { name: 'startButton', selector: 'button.start' },
   { name: 'stopButton', selector: 'button.stop' },
@@ -19,8 +20,6 @@ const staticElsData = [
   { name: 'lapsTbody', selector: '.laps-container table tbody' },
   { name: 'lapsContainer', selector: 'section.laps-container' },
   { name: 'fileFunctionalityOpen', selector: '.file-functionality-open' },
-  { name: 'fileFunctionalityPanel', selector: '.file-functionality-panel' },
-  { name: 'fileFunctionalityPanel', selector: '.file-functionality-panel' },
   { name: 'fileFunctionalityPanel', selector: '.file-functionality-panel' },
 ];
 // imitate early access

@@ -53,22 +53,31 @@ input {
   color: white;
 }
 
-input:hover {
+input:hover,
+input:focus {
   border-color: var(--green) !important;
   outline: none;
 }
 
-input:hover::placeholder {
-  color: var(--green);
-}
-
+input:hover::placeholder,
 input:focus::placeholder {
   color: var(--green);
 }
 
-input:focus {
-  border-color: var(--green) !important;
-  outline: none;
+textarea::-webkit-scrollbar {
+  width: 4px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background-color: var(--aubergine-dark);
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: var(--aubergine-mid);
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background-color: var(--aubergine);
 }
 
 .control-panel input.note {

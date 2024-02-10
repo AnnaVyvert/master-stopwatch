@@ -7,8 +7,12 @@ const keyActions = {
   },
   Enter: {
     condition: (ev) => !ev.target.id.length,
-    handler: () => {
-      staticEls.presentLapSubmit.click();
+    handler: (ev) => {
+      if (staticEls.editPresentLapTimePopup.open) {
+        staticEls.editPresentLapSubmit.click();
+      } else {
+        staticEls.presentLapSubmit.click();
+      }
     }
   },
   Escape: {
@@ -31,5 +35,5 @@ const handlingKeyActions = Object.keys(keyActions);
 function keyHandler(ev) {
   if (!handlingKeyActions.includes(ev.code)) return -1;
   if (!keyActions[ev.code].condition(ev)) return -2;
-  keyActions[ev.code].handler();
+  keyActions[ev.code].handler(ev);
 }

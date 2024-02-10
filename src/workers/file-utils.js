@@ -11,7 +11,7 @@ function downloadFile(content, fileName = 'file', contentTypeHeader = 'applicati
 
 function uploadFile(handler) {
   return () => {
-    const [file] = document.querySelector(UPLOAD_FILE_REF).files;
+    const [file] = staticEls.uploadFile.files;
     const reader = new FileReader();
 
     reader.addEventListener(

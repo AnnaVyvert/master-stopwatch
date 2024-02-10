@@ -16,8 +16,9 @@ function updateTimeVars() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  updateLabel(0);
+  collectStaticEls();
 
+  updateLabel(0);
   updateLapsTableVisibility();
   bindKeyListener();
   setupTableFromLapStore();
@@ -27,19 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
   updateIsPlaying();
   updateButtonVisibility();
 
-  getRefUpperNote().value = getValueFromStore(PRESENT_NOTE_STORE_NAME) ?? '';
-  getRefAsideNote().value = getValueFromStore(ASIDE_NOTE_STORE_NAME) ?? '';
+  staticEls.presentLapNote.value = getValueFromStore(PRESENT_NOTE_STORE_NAME) ?? '';
+  staticEls.bigNote.value = getValueFromStore(ASIDE_NOTE_STORE_NAME) ?? '';
 
   const asideNoteSize = JSON.parse(getValueFromStore(ASIDE_NOTE_SIZE_STORE_NAME)) ?? [200, 200];
-  getRefAsideNote().style = `width: ${asideNoteSize[0]}px; height: ${asideNoteSize[1]}px;`;
+  staticEls.bigNote.style = `width: ${asideNoteSize[0]}px; height: ${asideNoteSize[1]}px;`;
 
   updateTimeVars();
 
   if (isPlaying) {
     stopWatch();
   }
+  staticEls.uploadFile.addEventListener('change', uploadFile(uploadFileHandler), false);
 
-  getRefUpperNote().addEventListener('input', upperNoteHandleEvent);
-  getRefAsideNote().addEventListener('input', asideNoteHandleEvent);
-  new ResizeObserver(debounce(handleSizeChange)).observe(getRefAsideNote())
+  staticEls.presentLapNote.addEventListener('input', upperNoteHandleEvent);
+  staticEls.bigNote.addEventListener('input', asideNoteHandleEvent);
+  new ResizeObserver(debounce(handleSizeChange)).observe(staticEls.bigNote)
 });

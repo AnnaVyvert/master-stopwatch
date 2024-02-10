@@ -2,13 +2,13 @@ const keyActions = {
   Space: {
     condition: (ev) => ev.target.nodeName !== 'INPUT' && ev.target.nodeName !== 'TEXTAREA',
     handler: () => {
-      isPlaying ? document.querySelector('button.stop').click() : document.querySelector('button.start').click();
+      isPlaying ? staticEls.stopButton.click() : staticEls.startButton.click();
     }
   },
   Enter: {
     condition: (ev) => !ev.target.id.length,
     handler: () => {
-      getRefSubmitBtn().click();
+      staticEls.presentLapSubmit.click();
     }
   },
   Escape: {

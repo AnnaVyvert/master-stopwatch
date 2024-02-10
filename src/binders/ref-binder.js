@@ -1,18 +1,41 @@
-function getRefTotalTimer() {
-  return document.querySelector('.total-time-container .total-time');
-}
+const getDocumentQS = (selector) => document.querySelector(selector);
 
-function getRefUpperNote() {
-  return document.querySelector(`.control-panel input.note`);
-}
+// unique static html elements
+var staticEls = {};
+const staticElsData = [
+  { name: 'totalTimer', selector: '.total-time-container .total-time' },
+  { name: 'presentLapNote', selector: '.control-panel input.note' },
+  { name: 'bigNotePopup', selector: '.popup.aside-note' },
+  { name: 'bigNote', selector: '.popup.aside-note textarea' },
+  { name: 'editPresentLapTimePopup', selector: '.popup.edit-present-lap-time' },
+  { name: 'editPresentLapTimeInput', selector: '.popup.edit-present-lap-time input' },
+  { name: 'editPresentLapTimeSelect', selector: '.popup.edit-present-lap-time select' },
+  { name: 'editPresentLapTimeLabel', selector: '.popup.edit-present-lap-time .edit-present-lap-totaltime' },
+  { name: 'presentLapSubmit', selector: '.control-panel button.submit' },
+  { name: 'startButton', selector: 'button.start' },
+  { name: 'stopButton', selector: 'button.stop' },
+  { name: 'uploadFile', selector: 'input[type=file]' },
+  { name: 'lapsTable', selector: '.laps-container table' },
+  { name: 'lapsTbody', selector: '.laps-container table tbody' },
+  { name: 'lapsContainer', selector: 'section.laps-container' },
+  { name: 'fileFunctionalityOpen', selector: '.file-functionality-open' },
+  { name: 'fileFunctionalityPanel', selector: '.file-functionality-panel' },
+  { name: 'fileFunctionalityPanel', selector: '.file-functionality-panel' },
+  { name: 'fileFunctionalityPanel', selector: '.file-functionality-panel' },
+];
+// imitate early access
+(function mockStaticEls(elementsData = staticElsData) {
+  elementsData.forEach(el => {
+    staticEls[el.name] = {};
+  });
+})();
 
-function getRefAsideNote() {
-  return document.querySelector(`.popup.aside-note textarea`);
-}
-
-function getRefSubmitBtn() {
-  return document.querySelector(`.control-panel button.submit`);
-}
+function collectStaticEls(elementsData = staticElsData) {
+  elementsData.forEach(el => {
+    staticEls[el.name] = getDocumentQS(el.selector);
+  });
+  console.log(staticEls);
+};
 
 function getRowRef(id) {
   return document.querySelector(`tr#${ROW_ID}${id}`);

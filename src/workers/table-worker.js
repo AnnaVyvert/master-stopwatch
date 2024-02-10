@@ -52,7 +52,7 @@ function tableAddRow({ tableRef, isRowDisabled, rowId, data, editableData }) {
 }
 
 function updateLapsTableVisibility() {
-  const lapsContainerRef = document.querySelector('section.laps-container');
+  const lapsContainerRef = staticEls.lapsContainer;
   let store = preprocessLapStore();
   if (!store) return (lapsContainerRef.hidden = true);
   lapsContainerRef.hidden = false;

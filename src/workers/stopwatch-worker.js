@@ -2,10 +2,7 @@ var secCountPrev = 0;
 var secCount = 0;
 var stopWatchInterval;
 
-var LAPS_CONTAINER = '.laps-container table';
-var LAPS_CONTAINER_TBODY = '.laps-container table tbody';
 var LAPS_CONTAINER_TBODY_TR = '.laps-container table tbody tr';
-var NOTE_INPUT_CONTAINER = '.control-panel input.note';
 var NOTE_CONTENT_EMPTY = '-';
 
 const DISABLED_ATTRIBUTE = '_disabled';
@@ -116,13 +113,13 @@ function submitLap() {
     id: idCount,
     startTime: snapshots[0],
     time: getArraySumTime(snapshots),
-    note: getRefUpperNote().value.trim() || NOTE_CONTENT_EMPTY,
+    note: staticEls.presentLapNote.value.trim() || NOTE_CONTENT_EMPTY,
     disabled: false,
     position: idCount,
     protected: false,
   };
   tableAddRow({
-    tableRef: document.querySelector(LAPS_CONTAINER),
+    tableRef: staticEls.lapsTable,
     isRowDisabled: false,
     rowId: timeData.id,
     data: [timeData.id, dateToTimeFormat(timeData.startTime), secToTimeFormat(timeData.time), timeData.note, ACTION_BUTTONS(timeData.id, false)],
@@ -136,7 +133,7 @@ function submitLap() {
   idCount++;
 
   setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
-  getRefUpperNote().value = '';
+  staticEls.presentLapNote.value = '';
   setValueToStore(PRESENT_NOTE_STORE_NAME, '');
 
   setNewValueToLapStore(timeData);
@@ -148,8 +145,8 @@ function submitLap() {
 }
 
 function updateButtonVisibility() {
-  document.querySelector('button.start').hidden = isPlaying;
-  document.querySelector('button.stop').hidden = !isPlaying;
+  staticEls.startButton.hidden = isPlaying;
+  staticEls.stopButton.hidden = !isPlaying;
 }
 
 function stopWatch() {
@@ -166,6 +163,6 @@ function updateTime() {
 }
 
 function updateLabel(secCount) {
-  getRefTotalTimer().textContent = secToTimeFormat(secCount);
+  staticEls.totalTimer.textContent = secToTimeFormat(secCount);
   document.title = secToTimeFormat(secCount);
 }

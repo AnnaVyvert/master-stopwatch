@@ -100,11 +100,11 @@ function getValueFromLapStore(id) {
 function setupTableFromLapStore() {
   let store = preprocessLapStore();
   if (!store) return;
-  document.querySelector(LAPS_CONTAINER_TBODY).innerHTML = '';
+  staticEls.lapsTbody.innerHTML = '';
 
   store.reverse().forEach((el) => {
     tableAddRow({
-      tableRef: document.querySelector(LAPS_CONTAINER),
+      tableRef: staticEls.lapsTable,
       isRowDisabled: el.disabled,
       rowId: el.id,
       data: [el.id, dateToTimeFormat(el.startTime), secToTimeFormat(el.time), el.note, ACTION_BUTTONS(el.id, el.protected)],

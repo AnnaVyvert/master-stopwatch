@@ -163,6 +163,8 @@ function updateTime() {
 }
 
 function updateLabel(secCount) {
-  staticEls.totalTimer.textContent = secToTimeFormat(secCount);
-  document.title = secToTimeFormat(secCount);
+  let timeLabel = secToTimeFormat(secCount);
+  staticEls.totalTimer.textContent = timeLabel;
+  staticEls.editPresentLapTimeLabel.textContent = timeLabel;
+  document.title = timeLabel;
 }

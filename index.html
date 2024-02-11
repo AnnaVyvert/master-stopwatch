@@ -33,10 +33,9 @@
       <input type="file" multiple accept=".json" style="display: none;"/>
       <button onclick="handleAsideNotePopup()" class="aside-notes"><i class="fa-solid fa-note-sticky"></i></button>
       <dialog class="popup aside-note">
-        <div class="close-button">
-          <i class="fa-solid fa-xmark" onclick="handleAsideNotePopup()"></i>
+        <div class="header">
+          <div>aside notes:</div>
         </div>
-        <div>aside notes:</div>
         <div><textarea id="aside-note" cols="30" rows="10"></textarea></div>
       </dialog>
       <button onclick="handleEditPresentLapTimePopup()">

@@ -129,11 +129,8 @@ select {
   border: 1px solid white;
 }
 
-.close-button {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  cursor: pointer;
+.header {
+  margin-bottom: 8px;
 }
 
 @keyframes fade-in {

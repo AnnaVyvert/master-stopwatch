@@ -6,10 +6,6 @@
   text-align: center;
 }
 
-body {
-  zoom: 1.1;
-}
-
 .total-time {
   font-size: 60px;
 }
@@ -131,6 +127,15 @@ select {
 
 .header {
   margin-bottom: 8px;
+}
+
+.legend {
+  font-size: small;
+  color: gainsboro;
+  text-align: justify;
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
 }
 
 @keyframes fade-in {

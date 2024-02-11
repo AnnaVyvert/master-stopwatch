@@ -42,7 +42,7 @@
         <i class="fa-regular fa-clock"></i>
       </button>
       <dialog class="popup edit-present-lap-time">
-        <div>edit present lap time:</div>
+        <div class="header">edit present lap time:</div>
         <div>
           <span class="edit-present-lap-totaltime"></span>
           <select>
@@ -50,6 +50,12 @@
             <option value="-">-</option>
           </select>
           <input type="text" style="width: 70px; text-align: center;">
+          <div class="legend">
+            1 - minutes<br>
+            1m - minutes<br>
+            1h - hours<br>
+            1d - days<br>
+          </div>
         </div>
         <div style="margin-top: 16px;">
           <button onclick="handleEditPresentLapTimePopup()">

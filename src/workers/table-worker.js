@@ -5,7 +5,7 @@ function editCell(rowId, id, key) {
   const spanRef = document.querySelector(`tr#${ROW_ID}${rowId} span[id="${id}"]`);
   const inputRef = document.querySelector(`tr#${ROW_ID}${rowId} input[id="${id}"]`);
   if (spanRef.textContent && spanRef.textContent !== NOTE_CONTENT_EMPTY) {
-    inputRef.value = spanRef.textContent;
+    inputRef.value = spanRef.textContent.trim();
   }
   spanRef.hidden = !spanRef.hidden;
   inputRef.hidden = !inputRef.hidden;
@@ -34,8 +34,8 @@ function tableAddRow({ tableRef, isRowDisabled, rowId, data, editableData }) {
   editableData.forEach((el, i) => {
     const ind = data.indexOf(el.data);
     data[ind] = `
-    <input id=${i + 1} class=${el.key} hidden style="width: ${el.width}">
-    <span id=${i + 1} class=${el.key} onclick="editCell(${rowId}, ${i + 1}, '${el.key}')">
+    <input id=${i + 1} class="${el.key} center" hidden style="width: ${el.width}px" title="follow hh:mm:ss format">
+    <span id=${i + 1} class="${el.key}" onclick="editCell(${rowId}, ${i + 1}, '${el.key}')" title="click to edit time">
       ${el.data}
     </span>`;
   });

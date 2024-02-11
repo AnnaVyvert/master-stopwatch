@@ -13,7 +13,8 @@ tbody tr[_disabled] button.disable {
   border-color: var(--green) !important;
 }
 
-th, td {
+th,
+td {
   border-bottom: 1px solid white;
 }
 
@@ -38,7 +39,7 @@ button[_disabled] {
 
 button:focus {
   /* border: none; */
-  outline-color: var(--green);  
+  outline-color: var(--green);
 }
 
 button:hover {
@@ -91,8 +92,8 @@ input:focus::placeholder {
   opacity: 1;
 }
 
-button:has(i.fa-lock) + button.delete:hover,
-.laps-container:not(:has(i.fa-lock-open)) + div button.reset:hover {
+button:has(i.fa-lock)+button.delete:hover,
+.laps-container:not(:has(i.fa-lock-open))+div button.reset:hover {
   color: var(--orange);
   border-color: var(--orange);
 }

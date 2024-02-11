@@ -48,7 +48,7 @@ function handleAsideNotePopup() {
 function handleEditPresentLapTimePopup() {
   staticEls.editPresentLapTimeLabel.textContent = secToTimeFormat(sumTime);
   const inputRef = staticEls.editPresentLapTimeInput;
-  toggleModal(staticEls.editPresentLapTimePopup)
+  toggleModal(staticEls.editPresentLapTimePopup);
   inputRef.focus();
 }
 

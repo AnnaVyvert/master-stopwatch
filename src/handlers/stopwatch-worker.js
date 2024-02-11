@@ -15,9 +15,9 @@ var lockedIcon = 'fa-lock';
 var unlockedIcon = 'fa-lock-open';
 
 var ACTION_BUTTONS = (rowId, isLocked) => `
-  <button id=${rowId} onclick="protectLap(id)" class="lock"><i class="fa-solid ${isLocked ? 'fa-lock' : 'fa-lock-open'}"></i></button>
-  <button id=${rowId} onclick="deleteTime(id)" class="delete"><i class="fa-solid fa-trash"></i></button>
-  <button id=${rowId} onclick="disableTime(id)" class="disable"><i class="fa-solid fa-eye-slash"></i></button>
+  <button id=${rowId} onclick="protectLap(id)" title="prevent lap editing" class="lock"><i class="fa-solid ${isLocked ? 'fa-lock' : 'fa-lock-open'}"></i></button>
+  <button id=${rowId} onclick="deleteTime(id)" title="delete lap" class="delete"><i class="fa-solid fa-trash"></i></button>
+  <button id=${rowId} onclick="disableTime(id)" title="hide/open lap to total time counter" class="disable"><i class="fa-solid fa-eye-slash"></i></button>
 `;
 
 function removeAll() {

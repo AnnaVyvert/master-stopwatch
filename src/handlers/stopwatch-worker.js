@@ -125,7 +125,7 @@ function submitLap() {
     data: [timeData.id, dateToTimeFormat(timeData.startTime), secToTimeFormat(timeData.time), timeData.note, ACTION_BUTTONS(timeData.id, false)],
     editableData: [
       { width: 86, key: 'time', data: secToTimeFormat(timeData.time) },
-      { width: 218, key: 'note', data: timeData.note },
+      { width: 200, key: 'note', data: timeData.note },
     ],
   });
 

@@ -110,7 +110,7 @@ function setupTableFromLapStore() {
       data: [el.id, dateToTimeFormat(el.startTime), secToTimeFormat(el.time), el.note, ACTION_BUTTONS(el.id, el.protected)],
       editableData: [
         { width: 86, key: 'time', data: secToTimeFormat(el.time) },
-        { width: 218, key: 'note', data: el.note },
+        { width: 200, key: 'note', data: el.note },
       ],
     });
   });

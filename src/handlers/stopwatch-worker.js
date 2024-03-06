@@ -122,7 +122,7 @@ function submitLap() {
     tableRef: staticEls.lapsTable,
     isRowDisabled: false,
     rowId: timeData.id,
-    data: [timeData.id, dateToTimeFormat(timeData.startTime), secToTimeFormat(timeData.time), timeData.note, ACTION_BUTTONS(timeData.id, false)],
+    data: [timeData.id, dateToFullFormat(timeData.startTime), secToTimeFormat(timeData.time), timeData.note, ACTION_BUTTONS(timeData.id, false)],
     editableData: [
       { width: 86, key: 'time', data: secToTimeFormat(timeData.time) },
       { width: 200, key: 'note', data: timeData.note },

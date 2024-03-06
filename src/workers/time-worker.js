@@ -18,12 +18,25 @@ function secToShortTimeFormat(secNumber) {
 }
 
 function dateToTimeFormat(date) {
-  const now = new Date(date);
-  return paddingNumber(now.getHours()) +
+  const dateObj = new Date(date);
+  return paddingNumber(dateObj.getHours()) +
   ':' +
-  paddingNumber(now.getMinutes()) +
+  paddingNumber(dateObj.getMinutes()) +
   ':' +
-  paddingNumber(now.getSeconds());
+  paddingNumber(dateObj.getSeconds());
+}
+
+function dateToDateFormat(date) {
+  const dateObj = new Date(date);
+  return paddingNumber(dateObj.getDate()) +
+  '.' +
+  paddingNumber(dateObj.getMonth());
+}
+
+function dateToFullFormat(date) {
+  const timeFormat = dateToTimeFormat(date);
+  const dateFormat = dateToDateFormat(date);
+  return `${dateFormat} | ${timeFormat}`
 }
 
 function timeFormatToSec(timeFormat) {

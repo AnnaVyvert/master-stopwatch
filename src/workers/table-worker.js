@@ -33,12 +33,24 @@ function editCell(rowId, id, key) {
 function tableAddRow({ tableRef, isRowDisabled, rowId, data, editableData }) {
   editableData.forEach((el, i) => {
     const ind = data.indexOf(el.data);
-    data[ind] = `
-    <input id=${i + 1} class="${el.key} center" hidden style="width: ${el.width}px" title="follow hh:mm:ss format">
-    <span id=${i + 1} class="${el.key}" onclick="editCell(${rowId}, ${i + 1}, '${el.key}')" title="click to edit time">
-      ${el.data}
-    </span>`;
+    if (el.key === 'time') {
+      data[ind] = `
+        <input id=${i + 1} class="${el.key} center" hidden style="width: ${el.width}px" title="follow hh:mm:ss format">
+        <span id=${i + 1} class="${el.key}" onclick="editCell(${rowId}, ${i + 1}, '${el.key}')" title="click to edit time">
+          ${el.data}
+        </span>
+        <button class="copy-btn" title="copy sum minutes" onclick="handleCopyTime(event)"><i class="fa-solid fa-copy"></i></button>
+      `;
+    } else if (el.key === 'note') {
+      data[ind] = `
+        <input id=${i + 1} class="${el.key} center" hidden style="width: ${el.width}px" title="follow hh:mm:ss format">
+        <span id=${i + 1} class="${el.key}" onclick="editCell(${rowId}, ${i + 1}, '${el.key}')" title="click to edit time">
+          ${el.data}
+        </span>
+      `;
+    }
   });
+  
   const tbodySplitted = tableRef.innerHTML.split('<tbody>');
   const newRow = `
     <tr draggable="true" id=${ROW_ID}${rowId} ${isRowDisabled ? DISABLED_ATTRIBUTE : ''}>

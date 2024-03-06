@@ -44,6 +44,11 @@ function timeFormatToSec(timeFormat) {
   return hours * HOUR + minutes * MINUTE + seconds * 1;
 }
 
+function timeFormatToMin(timeFormat) {
+  const [hours, minutes] = timeFormat.split(':');
+  return hours * MINUTE + minutes * 1;
+}
+
 function getArraySumTime(arr) {
   let elapseTime = 0;
   if (arr.length===0) return 0;

@@ -32,13 +32,13 @@ function collectStaticEls(elementsData = staticElsData) {
   elementsData.forEach(el => {
     staticEls[el.name] = getDocumentQS(el.selector);
   });
-  console.log(staticEls);
 };
 
 var dynamicEls = {
   popups: () => Array.from(document.querySelectorAll('dialog.popup')),
   tbody: () => getDocumentQS('.laps-container table tbody'),
   lapTableRows: () => Array.from(document.querySelectorAll('.laps-container table tbody tr')),
+  copyBtns: () => Array.from(document.querySelectorAll('button.copy-btn')),
 };
 
 function getRowRef(id) {

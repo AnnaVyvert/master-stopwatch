@@ -39,6 +39,13 @@ var ASIDE_NOTE_SIZE_STORE_NAME = 'aside-note-size';
 
 const toggleModal = (modal) => modal.open ? modal.close() : modal.showModal();
 
+function handleCopyTime(ev) {
+  const cell = ev.target.closest('td')
+  const timeFormat = cell.querySelector('span.time').textContent;
+  const mins = timeFormatToMin(timeFormat);
+  setStringToClipboard(mins + 'm');
+}
+
 function handleAsideNotePopup() {
   toggleModal(staticEls.bigNotePopup)
   const inputRef = staticEls.bigNote;

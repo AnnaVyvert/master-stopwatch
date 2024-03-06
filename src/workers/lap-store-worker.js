@@ -44,7 +44,7 @@ function isMutationPossible(lap) {
 
 function mergeNotes(note1, note2) {
   if (note1 !== NOTE_CONTENT_EMPTY && note2 !== NOTE_CONTENT_EMPTY) {
-    return `${note1} + ${note2}`
+    return `${note1}, ${note2}`
   } else if (note1 === NOTE_CONTENT_EMPTY && note2 === NOTE_CONTENT_EMPTY) {
     return NOTE_CONTENT_EMPTY
   } else {

@@ -22,8 +22,10 @@ function editCell(rowId, id, key) {
       const newTime = timeFormatToSec(inputRef.value);
       spanRef.textContent = inputRef.value;
       updateValueInLapStore(Number(rowId), key, newTime);
-      sumTime += newTime - oldTime;
-      updateLabel(sumTime);
+      if (!getRowRef(rowId).hasAttribute(DISABLED_ATTRIBUTE)) {
+        sumTime += newTime - oldTime;
+        updateLabel(sumTime);
+      }
       inputRef.hidden = true;
       spanRef.hidden = false;
     }

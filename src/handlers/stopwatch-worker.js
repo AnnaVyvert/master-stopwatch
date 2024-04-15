@@ -21,38 +21,42 @@ var ACTION_BUTTONS = (rowId, isLocked) => `
 `;
 
 function removeAll() {
-  let store = preprocessLapStore();
-  if (!store) return;
-
-  store.forEach((el) => {
-    if (getRefAction(el.id).isLocked) return;
-    store = store.filter((lap) => lap.id !== el.id);
-    getRowRef(el.id).remove();
-    deleteValueFromLapStore(el.id);
+  new ConfirmModal('delete all laps?', () => {
+    let store = preprocessLapStore();
+    if (!store) return;
+  
+    store.forEach((el) => {
+      if (getRefAction(el.id).isLocked) return;
+      store = store.filter((lap) => lap.id !== el.id);
+      getRowRef(el.id).remove();
+      deleteValueFromLapStore(el.id);
+    });
+  
+    idCount = findMaxIdInLapStore() + 1;
+  
+    secLap=0;
+    TIME_SNAPSHOTS_RESET();
+    setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
+  
+    updateTimeVars();
+    updateButtonVisibility();
+  
+    updateIsPlaying();
+    updateLapsTableVisibility();
   });
-
-  idCount = findMaxIdInLapStore() + 1;
-
-  secLap=0;
-  TIME_SNAPSHOTS_RESET();
-  setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
-
-  updateTimeVars();
-  updateButtonVisibility();
-
-  updateIsPlaying();
-  updateLapsTableVisibility();
 }
 
 function removePresentLapTime() {
-  secLap=0;
-  TIME_SNAPSHOTS_RESET();
+  new ConfirmModal('reset present lap time?', () => {
+    secLap=0;
+    TIME_SNAPSHOTS_RESET();
 
-  updateTimeVars();
-  updateIsPlaying();
-  updateButtonVisibility();
+    updateTimeVars();
+    updateIsPlaying();
+    updateButtonVisibility();
 
-  setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
+    setValueToStore(TIME_SNAPSHOTS_STORE_NAME, JSON.stringify(snapshots));
+  });
 }
 
 function start() {

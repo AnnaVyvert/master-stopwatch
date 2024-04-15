@@ -7,6 +7,7 @@ const staticElsData = [
   { name: 'presentLapNote', selector: '.control-panel input.note' },
   { name: 'bigNotePopup', selector: '.popup.aside-note' },
   { name: 'bigNote', selector: '.popup.aside-note textarea' },
+  { name: 'confirmPopup', selector: '.popup.modal-confirm' },
   { name: 'editPresentLapTimePopup', selector: '.popup.edit-present-lap-time' },
   { name: 'editPresentLapTimeInput', selector: '.popup.edit-present-lap-time input' },
   { name: 'editPresentLapTimeSelect', selector: '.popup.edit-present-lap-time select' },

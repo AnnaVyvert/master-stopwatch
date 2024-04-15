@@ -37,6 +37,17 @@
         </div>
         <div><textarea id="aside-note" cols="30" rows="10"></textarea></div>
       </dialog>
+      <dialog class="popup modal-confirm">
+        <div class="header modal-confirm__title"></div>
+        <div style="margin-top: 16px;">
+          <button class="modal-confirm__cancel">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <button class="modal-confirm__check">
+            <i class="fa-solid fa-check"></i>
+          </button>
+        </div>
+      </dialog>
       <button title="open time edit tool" onclick="handleEditPresentLapTimePopup()">
         <i class="fa-regular fa-clock"></i>
       </button>
@@ -96,6 +107,8 @@
   <script src="src/workers/store-worker.js"></script>
   <script src="src/workers/table-worker.js"></script>
   <script src="src/workers/time-worker.js"></script>
+
+  <script src="src/confirm-modal/class.js"></script>
 
   <script src="src/workers/lap-store-worker.js"></script>
   <script src="src/handlers/stopwatch-worker.js"></script>

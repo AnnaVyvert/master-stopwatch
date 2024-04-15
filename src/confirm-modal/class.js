@@ -27,6 +27,9 @@ class ConfirmModal {
   }
 
   constructor(title, onsuccess, oncancel = () => {}) {
+    this.resetButton(this.checkButtonSelector);
+    this.resetButton(this.cancelButtonSelector);
+
     this.setModalTitle(title);
 
     staticEls.confirmPopup.showModal();

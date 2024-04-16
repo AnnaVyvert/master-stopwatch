@@ -1,5 +1,5 @@
 const keyActions = {
-  Space: {
+  " ": {
     condition: (ev) => ev.target.nodeName !== 'INPUT' && ev.target.nodeName !== 'TEXTAREA',
     handler: () => {
       isPlaying ? staticEls.stopButton.click() : staticEls.startButton.click();
@@ -8,10 +8,16 @@ const keyActions = {
   Enter: {
     condition: (ev) => !ev.target.id.length,
     handler: (ev) => {
-      if (staticEls.editPresentLapTimePopup.open) {
-        staticEls.editPresentLapSubmit.click();
-      } else {
-        staticEls.presentLapSubmit.click();
+      ev.preventDefault();
+      switch(true) {
+        case staticEls.editPresentLapTimePopup.open:
+          staticEls.editPresentLapSubmit.click();
+          break;
+        case staticEls.confirmPopup.open:
+          getDocumentQS('.modal-confirm__check').click();
+          break;
+        default:
+          staticEls.presentLapSubmit.click();
       }
     }
   },
@@ -32,7 +38,7 @@ function bindKeyListener(handler=keyHandler) {
 const handlingKeyActions = Object.keys(keyActions);
 
 function keyHandler(ev) {
-  if (!handlingKeyActions.includes(ev.code)) return -1;
-  if (!keyActions[ev.code].condition(ev)) return -2;
-  keyActions[ev.code].handler(ev);
+  if (!handlingKeyActions.includes(ev.key)) return -1;
+  if (!keyActions[ev.key].condition(ev)) return -2;
+  keyActions[ev.key].handler(ev);
 }

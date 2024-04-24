@@ -5,14 +5,14 @@ function findAndProcessLinks(inputText) {
   let replacedText = inputText.replace(replacePattern1, function(match) {
     const lastIndex = Math.max(match.lastIndexOf("/"), match.lastIndexOf("="));
     const linkText = match.slice(lastIndex+1);
-    return '<a target="_blank" href="' + match + '">' + linkText + '</a>';
+    return '<a target="_blank" href="' + match + '">' + (linkText || '/') + '</a>';
   });
 
   const replacePattern2 = /(^|[^\/])(www\.[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/g;
   replacedText = replacedText.replace(replacePattern2, function(match, group1, group2) {
     const lastIndex = Math.max(group2.lastIndexOf("/"), group2.lastIndexOf("="));
     const linkText = group2.slice(lastIndex+1);
-    return group1 + '<a target="_blank" href="http://' + group2 + '">' + linkText + '</a>';
+    return group1 + '<a target="_blank" href="http://' + group2 + '">' + (linkText || '/') + '</a>';
   });
 
   return replacedText;

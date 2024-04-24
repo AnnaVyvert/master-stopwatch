@@ -18,41 +18,55 @@ function findAndProcessLinks(inputText) {
   return replacedText;
 }
 
-function editCell(rowId, id, key) {
+function editCell(ev, rowId, key) {
   if (getRefAction(rowId).isLocked) return;
-  const spanRef = document.querySelector(`tr#${ROW_ID}${rowId} span[id="${id}"]`);
-  const inputRef = document.querySelector(`tr#${ROW_ID}${rowId} input[id="${id}"]`);
+
+  const spanRef = document.querySelector(`tr#${ROW_ID}${rowId} span.${key}`);
+  const inputRef = document.querySelector(`tr#${ROW_ID}${rowId} input.${key}`);
+
+  if (ev.srcElement.tagName === 'A' && key === 'note' && spanRef.textContent.split(' ')[1]) return;
   if (spanRef.textContent && spanRef.textContent !== NOTE_CONTENT_EMPTY) {
-    inputRef.value = getValueFromLapStore(Number(rowId))[key];
+    if (key === 'note') {
+      inputRef.value = getValueFromLapStore(Number(rowId))[key];
+    } else if (key === 'time') {
+      inputRef.value = spanRef.textContent.trim();
+    }
   }
+
   spanRef.hidden = !spanRef.hidden;
   inputRef.hidden = !inputRef.hidden;
 
-  if (inputRef.getAttribute('data-hasListener')) return;
-  inputRef.addEventListener('focusout', (ev) => {
-    if (key === 'note') {
-      const _spanValue = findAndProcessLinks(inputRef.value.trim()) || NOTE_CONTENT_EMPTY;
-      spanRef.innerHTML = _spanValue;
-      updateValueInLapStore(Number(rowId), key, inputRef.value || NOTE_CONTENT_EMPTY);
-      inputRef.hidden = true;
-      spanRef.hidden = false;
-    } else if (key === 'time') {
-      if (inputRef.value == '') return;
-      if (!new RegExp('^[0-5][0-9][:][0-5][0-9][:][0-5][0-9]$').test(inputRef.value.trim())) return;
-      const oldTime = timeFormatToSec(spanRef.textContent);
-      const newTime = timeFormatToSec(inputRef.value);
-      spanRef.textContent = inputRef.value;
-      updateValueInLapStore(Number(rowId), key, newTime);
-      if (!getRowRef(rowId).hasAttribute(DISABLED_ATTRIBUTE)) {
-        sumTime += newTime - oldTime;
-        updateLabel(sumTime);
-      }
-      inputRef.hidden = true;
-      spanRef.hidden = false;
-    }
-  });
-  inputRef.setAttribute('data-hasListener', true);
+  if (ev.srcElement.tagName !== 'A') {
+    inputRef.focus();
+  }
 }
+
+function switchToStatic(ev, key, rowId) {
+  const spanRef = document.querySelector(`tr#${ROW_ID}${rowId} span.${key}`);
+  const inputRef = document.querySelector(`tr#${ROW_ID}${rowId} input.${key}`);
+
+  if (key === 'note') {
+    const _spanValue = findAndProcessLinks(inputRef.value.trim()) || NOTE_CONTENT_EMPTY;
+    spanRef.innerHTML = _spanValue;
+    updateValueInLapStore(Number(rowId), key, inputRef.value || NOTE_CONTENT_EMPTY);
+
+    inputRef.hidden = true;
+    spanRef.hidden = false;
+  } else if (key === 'time') {
+    if (inputRef.value == '') return;
+    if (!new RegExp('^[0-5][0-9][:][0-5][0-9][:][0-5][0-9]$').test(inputRef.value.trim())) return;
+    const oldTime = timeFormatToSec(spanRef.textContent);
+    const newTime = timeFormatToSec(inputRef.value);
+    spanRef.textContent = inputRef.value;
+    updateValueInLapStore(Number(rowId), key, newTime);
+    if (!getRowRef(rowId).hasAttribute(DISABLED_ATTRIBUTE)) {
+      sumTime += newTime - oldTime;
+      updateLabel(sumTime);
+    }
+    inputRef.hidden = true;
+    spanRef.hidden = false;
+  }
+};
 
 function tableAddRow({ tableRef, isRowDisabled, rowId, data, editableData }) {
   editableData.forEach((el, i) => {
@@ -60,7 +74,7 @@ function tableAddRow({ tableRef, isRowDisabled, rowId, data, editableData }) {
     if (el.key === 'time') {
       data[ind] = `
         <input id=${i + 1} class="${el.key} center" hidden style="width: ${el.width}px" title="follow hh:mm:ss format">
-        <span id=${i + 1} class="${el.key}" onclick="editCell(${rowId}, ${i + 1}, '${el.key}')" title="click to edit time">
+        <span id=${i + 1} class="${el.key}" title="click to edit time">
           ${el.data}
         </span>
         <button class="copy-btn" title="copy sum minutes" onclick="handleCopyTime(event)"><i class="fa-solid fa-copy"></i></button>
@@ -68,7 +82,7 @@ function tableAddRow({ tableRef, isRowDisabled, rowId, data, editableData }) {
     } else if (el.key === 'note') {
       data[ind] = `
         <input id=${i + 1} class="${el.key} center" hidden style="width: ${el.width}px" title="you can also add links here">
-        <span id=${i + 1} class="${el.key}" onclick="editCell(${rowId}, ${i + 1}, '${el.key}')" title="click to edit note">
+        <span id=${i + 1} class="${el.key}" title="click to edit note">
           ${el.data}
         </span>
       `;
@@ -86,6 +100,13 @@ function tableAddRow({ tableRef, isRowDisabled, rowId, data, editableData }) {
   `
   tableRef.innerHTML = tbodySplitted[0] + newRow + tbodySplitted[1];
   document.querySelector(`tr[id="${ROW_ID}${rowId}"] span.note`).innerHTML = findAndProcessLinks(editableData[1].data);
+}
+
+function addEditOnTouchListener(rowId) {
+  document.querySelector(`tr[id="${ROW_ID}${rowId}"] span.time`).addEventListener('click', (ev) => editCell(ev, rowId, 'time'));
+  document.querySelector(`tr[id="${ROW_ID}${rowId}"] span.note`).addEventListener('click', (ev) => editCell(ev, rowId, 'note'));
+  document.querySelector(`tr[id="${ROW_ID}${rowId}"] input.time`).addEventListener('focusout', (ev) => switchToStatic(ev, 'time', rowId));
+  document.querySelector(`tr[id="${ROW_ID}${rowId}"] input.note`).addEventListener('focusout', (ev) => switchToStatic(ev, 'note', rowId));
 }
 
 function updateLapsTableVisibility() {

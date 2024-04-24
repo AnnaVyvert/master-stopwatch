@@ -114,5 +114,13 @@ function setupTableFromLapStore() {
       ],
     });
   });
+  setOnFocusEditListeners();
   bindDragAndDrop();
+}
+
+function setOnFocusEditListeners() {
+  let store = preprocessLapStore();
+  store.reverse().forEach((el) => {
+    addEditOnTouchListener(el.id);
+  })
 }

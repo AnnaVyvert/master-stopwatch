@@ -146,6 +146,7 @@ function submitLap() {
 
   updateLapsTableVisibility();
   bindDragAndDrop();
+  setOnFocusEditListeners();
 }
 
 function updateButtonVisibility() {

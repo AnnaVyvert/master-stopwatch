@@ -151,3 +151,10 @@ select {
 .modal-confirm__title {
   margin-top: 12px;
 }
+
+a:visited {
+  color: var(--link-visited);
+}
+a:not(:visited) {
+  color: var(--link-active);
+}

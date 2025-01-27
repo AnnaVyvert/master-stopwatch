@@ -1,4 +1,4 @@
-const BACKUP_FILE_NAME = 'stopwatch-laps-backup.json';
+const BACKUP_FILE_NAME = 'laps-timer-backup.json';
 
 function exportDataHandler() {
   const store = preprocessLapStore();

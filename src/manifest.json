@@ -1,0 +1,21 @@
+{
+  "name": "laps-timer",
+  "short_name": "l-timer",
+  "start_url": "/laps",
+  "theme_color": "#2c001e",
+  "background_color": "#2c001e",
+  "display": "standalone",
+  "display_override": ["minimal-ui", "browser"],
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

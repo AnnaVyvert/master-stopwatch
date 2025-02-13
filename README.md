@@ -2,7 +2,7 @@
 
 A web service for tracking and convenient time management.
 
-In this service, you can write notes, track and manage time.
+In this service, you can write notes, track and manage tracked time.
 
 ---
 
